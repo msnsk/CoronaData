@@ -32,9 +32,9 @@ struct LocalDashboard: View {
             
             HeaderView(
                 newlyPatients: model.getNewlyPatientsOnLastDay(),
-                newlyPatientslastUpdate: model.getLocalPatientsLatestDate(),
+                newlyPatientslastUpdate: model.localPatientsLatestDate,
                 comulativePatients: model.getComulativePatientsOnLastDay(),
-                comulativePatientsLastUpdate: model.getLocalPatientsLatestDate()
+                comulativePatientsLastUpdate: model.localPatientsLatestDate
             )
             
             Picker(selection: $selection, label: Text("期間を選択")){
@@ -46,7 +46,7 @@ struct LocalDashboard: View {
             .padding(.horizontal, 40)
             .padding(.bottom, 16)
             
-            if model.getLocalPatientsLatestDate() != "Loading..." {
+            if model.localPatientsLatestDate != "Loading..." {
                 switch selection {
                 case 0:
                     LocalMonthlySummaryView()
@@ -62,6 +62,7 @@ struct LocalDashboard: View {
         }
         .padding(.vertical, 25)
         .onAppear() {
+            model.getLocalPatientsLatestDate()
             print("firstAppear: \(locationManager.adminArea)" ?? "no adminArea")
             print("currentLocation: \(model.currentLocation)")
             
