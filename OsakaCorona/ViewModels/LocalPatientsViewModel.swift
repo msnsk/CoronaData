@@ -11,7 +11,9 @@ import Foundation
 import Combine
 
 class LocalPatientsViewModel: ObservableObject {
+    
     @Published var localPatientsData = [ItemData]()
+    @Published var localPatientsLatestDate = "Loading..."
     @Published var currentLocation: String {
         didSet {
             UserDefaults.standard.set(currentLocation, forKey:"location")
@@ -19,47 +21,51 @@ class LocalPatientsViewModel: ObservableObject {
     }
     
     init() {
-        currentLocation = UserDefaults.standard.string(forKey: "location") ?? "東京"
-        self.loadPatientsData()
-        //self.loadLocalDeathsData()
+        currentLocation = UserDefaults.standard.string(forKey: "location") ?? "福岡県"
+        loadPatientsData()
+        getLocalPatientsLatestDate()
     }
     
+    func convertLocationName(area: String?) {
+        if let areaName = area {
+            currentLocation = areaNameDict[areaName] ?? "福岡県"
+        }
+    }
     // ここから累積感染者数
     // 累積感染者数のJSONデータをデコードして取得する
     func loadPatientsData() {
         guard let encodedLocation = self.currentLocation.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            print("Invalid URL")
             return
         }
         let completeURL = "https://opendata.corona.go.jp/api/Covid19JapanAll" + "?dataName=" + encodedLocation
         //print("completeURL: \(completeURL)")
         guard let url = URL(string: completeURL) else {
-            print("Invalid URL")
+            print("Local Patients - Invalid URL")
             return
         }
         
         URLSession.shared.dataTask(with: url) { data, response, error in
             let statusCode = (response as! HTTPURLResponse).statusCode
-            print("Status Code: \(statusCode)")
+            print("Local Patients: Status Code: \(statusCode)")
             guard let jsonData = data else { return }
             do {
                 let fetchedData = try JSONDecoder().decode(LocalPatientsDataModel.self, from: jsonData)
                 DispatchQueue.main.async {
-                    print(fetchedData.itemList[0])
                     self.localPatientsData = fetchedData.itemList.reversed()
                 }
             } catch {
-                fatalError("Failed loading \(error)")
+                fatalError("Local Patients: Failed loading \(error)")
             }
         }.resume()
     }
     
-    func getLocalPatientsLatestDate() -> String {
-        var latestDate = "Loading..."
+    // 感染者データの最終日を取得する
+    func getLocalPatientsLatestDate() {
+        //var latestDate = "Loading..."
         if let date = self.localPatientsData.last?.date {
-            latestDate = String(date)
+            localPatientsLatestDate = String(date)
         }
-        return latestDate
+        //return latestDate
     }
     
     // 最終日の累積感染者数を取得する
@@ -256,7 +262,6 @@ class LocalPatientsViewModel: ObservableObject {
 //    func loadLocalDeathsData() {
 //    guard let encodedLocation = self.currentLocation.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else { return }
 //        let endpoint = "https://opendata.corona.go.jp/api/Covid19JapanNdeaths?dataName=" + encodedLocation
-//        print("completeURL: \(endpoint)")
 //        guard let url = URL(string: endpoint) else {
 //            print("Invalid URL")
 //            return

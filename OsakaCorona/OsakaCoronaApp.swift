@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 @main
 struct OsakaCoronaApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(JapanPatientsViewModel())
+                .environmentObject(LocalPatientsViewModel())
         }
     }
 }

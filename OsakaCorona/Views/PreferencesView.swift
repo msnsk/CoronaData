@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PreferencesView: View {
-    @ObservedObject var model = LocalPatientsViewModel()
+    @EnvironmentObject var model: LocalPatientsViewModel
     let locationList = [
         "北海道",
         "青森県",
@@ -62,7 +62,7 @@ struct PreferencesView: View {
         NavigationView {
             Form {
                 Section(header: Text("Location")) {
-                    Picker(selection: self.$model.currentLocation, label: Text("現在の位置"), content: {
+                    Picker(selection: self.$model.currentLocation, label: Text("都道府県選択"), content: {
                         ForEach(0..<self.locationList.count) { index in
                             Text(self.locationList[index]).tag(self.locationList[index])
                         }

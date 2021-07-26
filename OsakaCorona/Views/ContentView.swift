@@ -8,14 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var model = LocalPatientsViewModel()
+    @EnvironmentObject var model: LocalPatientsViewModel
+    //@State var locationViewModel = LocationViewModel(model: LocationDataSource())
     
     var body: some View {
         ZStack {
             TabView {
                 LocalDashboard()
                     .tabItem {
-                        Image(systemName: "mappin.and.ellipse")
+                        Image(systemName: "mappin")
                         Text("\(model.currentLocation)")
                     }
                 JapanDashboard()

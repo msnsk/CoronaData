@@ -17,10 +17,6 @@ struct HeaderView: View {
     var comulativeDeaths: String? = nil
     var comulativeDeathsLastUpdate: String? = nil
     
-    //    init(newlyPatients: String, newlyPatientslastUpdate: String, comulativePatients: String, comulativePatientsLastUpdate: String, newlyDeaths: String? = nil, newlyDeathsLastUpdate: String? = nil, comulativeDeaths: String? = nil, comulativeDeathsLastUpdate: String? = nil) {
-    //
-    //    }
-    
     var body: some View {
         HStack(spacing: 10){
             VStack {

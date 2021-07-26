@@ -23,12 +23,12 @@ class JapanPatientsViewModel: ObservableObject {
     
     func loadJapanPatientsData() {
         guard let url = URL(string: "https://data.corona.go.jp/converted-json/covid19japan-npatients.json") else {
-            print("Invalid URL")
+            print("Japan Patient: Invalid URL")
             return
         }
         URLSession.shared.dataTask(with: url) { data, response, error in
             let statusCode = (response as! HTTPURLResponse).statusCode
-            print("Status Code: \(statusCode)")
+            print("Japan Patients: Status Code: \(statusCode)")
             guard let jsonData = data else { return }
             do {
                 let fetchedData = try JSONDecoder().decode([JapanPatientsDataModel].self, from: jsonData)
@@ -36,7 +36,7 @@ class JapanPatientsViewModel: ObservableObject {
                     self.japanPatientsData = fetchedData
                 }
             } catch {
-                fatalError("Failed loading \(error)")
+                fatalError("Japan Patients: Failed loading: \(error)")
             }
         }.resume()
         
@@ -193,12 +193,12 @@ class JapanPatientsViewModel: ObservableObject {
     // 全国の入林治療等を要する者のJSONデータをデコードして取得する
     func loadJapanPatientsNeedInpatientData() {
         guard let url = URL(string: "https://data.corona.go.jp/converted-json/covid19japan-ncures.json") else {
-            print("Invalid URL")
+            print("Japan Need Inpatient: Invalid URL")
             return
         }
         URLSession.shared.dataTask(with: url) { data, response, error in
             let statusCode = (response as! HTTPURLResponse).statusCode
-            print("Status Code: \(statusCode)")
+            print("Japan Need Inpatient: Status Code: \(statusCode)")
             guard let jsonData = data else { return }
             do {
                 let fetchedData = try JSONDecoder().decode([JapanPatientsNeedInpatientModel].self, from: jsonData)
@@ -287,12 +287,12 @@ class JapanPatientsViewModel: ObservableObject {
     // 累積死亡者数のJSONデータをデコードして取得
     func loadJapanDeathsData() {
         guard let url = URL(string: "https://data.corona.go.jp/converted-json/covid19japan-ndeaths.json") else {
-            print("Invalid URL")
+            print("Japan Deaths: Invalid URL")
             return
         }
         URLSession.shared.dataTask(with: url) { data, response, error in
             let statusCode = (response as! HTTPURLResponse).statusCode
-            print("Status Code: \(statusCode)")
+            print("Japan Deaths: Status Code: \(statusCode)")
             guard let jsonData = data else { return }
             do {
                 let fetchedData = try JSONDecoder().decode([JapanDeathsModel].self, from: jsonData)
@@ -300,7 +300,7 @@ class JapanPatientsViewModel: ObservableObject {
                     self.japanDeathsData = fetchedData
                 }
             } catch {
-                fatalError("Failed loading \(error)")
+                fatalError("Japan Deaths: Failed loading \(error)")
             }
         }.resume()
     }
@@ -477,25 +477,22 @@ class JapanPatientsViewModel: ObservableObject {
     // ここから都道府県別累積陽性者数
     // 都道府県別累積陽性者数のJSONデータをデコードして取得する
     func loadPrefectureComulativePatients() {
-        let stringURL = "https://data.corona.go.jp/converted-json/covid19japan-all.json"
-        print("url: \(stringURL)")
-        guard let url = URL(string: stringURL) else {
-            print("Invalid URL")
+        guard let url = URL(string: "https://data.corona.go.jp/converted-json/covid19japan-all.json") else {
+            print("Prefecture Comulative: Invalid URL")
             return
         }
         
         URLSession.shared.dataTask(with: url) { data, response, error in
             let statusCode = (response as! HTTPURLResponse).statusCode
-            print("Status Code: \(statusCode)")
+            print("Prefecture Comulative: Status Code: \(statusCode)")
             guard let jsonData = data else { return }
             do {
                 let fetchedData = try JSONDecoder().decode([PrefectureComulativePatientsModel].self, from: jsonData)
                 DispatchQueue.main.async {
-                    print(fetchedData)
                     self.prefecturePatientsData = fetchedData[0].area
                 }
             } catch {
-                fatalError("Failed loading \(error)")
+                fatalError("Prefecture Comulative: Failed loading \(error)")
             }
         }.resume()
     }

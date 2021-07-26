@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftUICharts
 
 struct LocalDailySummaryView: View {
-    @ObservedObject var model = LocalPatientsViewModel()
+    @EnvironmentObject var model: LocalPatientsViewModel
     
     var body: some View {
         ScrollView {
@@ -29,21 +29,6 @@ struct LocalDailySummaryView: View {
                     cornerImage: Image(systemName: "chart.bar.fill"),
                     valueSpecifier: "%.0f"
                 )
-//                LineChartView(
-//                    data: self.model.getLocalNewlyDeathsInDays(),
-//                    title: "新規死亡者数",
-//                    legend: "過去7日間",
-//                    form: ChartForm.large,
-//                    valueSpecifier: "%.0f"
-//                )
-//                BarChartView(
-//                    data: ChartData(values: self.model.getLocalComulativeDeathsInDays()),
-//                    title: "累積死亡者数",
-//                    legend: "過去7日間",
-//                    form: ChartForm.extraLarge,
-//                    cornerImage: Image(systemName: "chart.bar.fill"),
-//                    valueSpecifier: "%.0f"
-//                )
             }
             .padding()
         }

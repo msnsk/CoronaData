@@ -9,14 +9,26 @@ import SwiftUI
 import SwiftUICharts
 
 struct LocalDashboard: View {
-    @ObservedObject var model = LocalPatientsViewModel()
-    let pigments = ["24ヶ月間", "12週間", "7日間"]
+    @EnvironmentObject var model: LocalPatientsViewModel
+    
+    @ObservedObject var locationManager = LocationManager()
+//    var userLatitude: String {
+//        return locationManager.lastLocation?.coordinate.latitude.description ?? "0"
+//    }
+//    var userLongitude: String {
+//        return locationManager.lastLocation?.coordinate.longitude.description ?? "0"
+//    }
+    
     @State var selection = 0
+    let pigments = ["24ヶ月間", "12週間", "7日間"]
     
     var body: some View {
         VStack(spacing: 0) {
             Text("\(model.currentLocation)のコロナ関連データ")
                 .font(.title)
+            
+            Text("location status: \(locationManager.statusString)")
+            Text("area: \(locationManager.adminArea ?? "")")
             
             HeaderView(
                 newlyPatients: model.getNewlyPatientsOnLastDay(),
@@ -31,8 +43,8 @@ struct LocalDashboard: View {
                 }
             }
             .pickerStyle(SegmentedPickerStyle())
-            .padding(.horizontal, 30)
-            .padding(.bottom, 0)
+            .padding(.horizontal, 40)
+            .padding(.bottom, 16)
             
             if model.getLocalPatientsLatestDate() != "Loading..." {
                 switch selection {
@@ -50,12 +62,22 @@ struct LocalDashboard: View {
         }
         .padding(.vertical, 25)
         .onAppear() {
-            model.currentLocation = UserDefaults.standard.string(forKey: "location") ?? "東京"
+            print("firstAppear: \(locationManager.adminArea)" ?? "no adminArea")
+            print("currentLocation: \(model.currentLocation)")
+            
+            model.loadPatientsData()
+            print("secondAppear: \(locationManager.adminArea)" ?? "no adminArea")
+            print("currentLocation: \(model.currentLocation)")
+        }
+        .onDisappear {
+            print("area: \(locationManager.adminArea)" ?? "no adminArea")
+            print("currentLocation: \(model.currentLocation)")
         }
     }
 }
 
 struct Infected_Previews: PreviewProvider {
+    //static let locationViewModel = LocationViewModel(model: LocationDataSource())
     static var previews: some View {
         LocalDashboard()
     }

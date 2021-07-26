@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct JapanDashboard: View {
-    @ObservedObject var model = JapanPatientsViewModel()
+    @EnvironmentObject var model: JapanPatientsViewModel
     let pigments = ["24ヶ月間", "12週間", "7日間"]
     @State var selection = 0
     
@@ -36,8 +36,8 @@ struct JapanDashboard: View {
                 }
             }
             .pickerStyle(SegmentedPickerStyle())
-            .padding(.horizontal, 30)
-            .padding(.bottom, 0)
+            .padding(.horizontal, 40)
+            .padding(.bottom, 16)
             
             if model.getJapanPatientsLatestDate() != "Loading..." {
                 switch selection {

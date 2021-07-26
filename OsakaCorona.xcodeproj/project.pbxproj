@@ -10,6 +10,9 @@
 		170A6C3226AAA04600C7D53E /* JapanWeeklySummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170A6C3126AAA04600C7D53E /* JapanWeeklySummaryView.swift */; };
 		170A6C3626AAA91600C7D53E /* JapanDaylySummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170A6C3526AAA91600C7D53E /* JapanDaylySummaryView.swift */; };
 		170A6C3826AAE97900C7D53E /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170A6C3726AAE97900C7D53E /* HeaderView.swift */; };
+		1717592526AD1E9E0014146E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1717592426AD1E9E0014146E /* CoreLocation.framework */; };
+		1717592726AD1FC90014146E /* LocationManager2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1717592626AD1FC90014146E /* LocationManager2.swift */; };
+		1717592926AD24780014146E /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1717592826AD24780014146E /* LocationViewModel.swift */; };
 		1720FE1926ABE61300C8C947 /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1720FE1826ABE61300C8C947 /* PreferencesView.swift */; };
 		17518DE426A9CA6100C9465F /* JapanPatientsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17518DE326A9CA6100C9465F /* JapanPatientsViewModel.swift */; };
 		17518DE726AA646800C9465F /* JapanDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17518DE626AA646800C9465F /* JapanDashboard.swift */; };
@@ -25,6 +28,8 @@
 		1797A60C26A5282200680A03 /* LocalPatientsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1797A60B26A5282200680A03 /* LocalPatientsViewModel.swift */; };
 		1797A60E26A5282E00680A03 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1797A60D26A5282E00680A03 /* DataModel.swift */; };
 		1797A61026A5287F00680A03 /* LocalDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1797A60F26A5287F00680A03 /* LocalDashboard.swift */; };
+		17EC20F026AE493900CF825A /* LocationNameList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EC20EF26AE493900CF825A /* LocationNameList.swift */; };
+		17EC20F226AE9F7100CF825A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EC20F126AE9F7100CF825A /* LocationManager.swift */; };
 		17F9DFD026A8883000D8270C /* LocalWeeklySummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F9DFCF26A8883000D8270C /* LocalWeeklySummaryView.swift */; };
 		17F9DFD226A888C800D8270C /* LocalDailySummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F9DFD126A888C800D8270C /* LocalDailySummaryView.swift */; };
 /* End PBXBuildFile section */
@@ -50,6 +55,9 @@
 		170A6C3126AAA04600C7D53E /* JapanWeeklySummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapanWeeklySummaryView.swift; sourceTree = "<group>"; };
 		170A6C3526AAA91600C7D53E /* JapanDaylySummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapanDaylySummaryView.swift; sourceTree = "<group>"; };
 		170A6C3726AAE97900C7D53E /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		1717592426AD1E9E0014146E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		1717592626AD1FC90014146E /* LocationManager2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager2.swift; sourceTree = "<group>"; };
+		1717592826AD24780014146E /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 		1720FE1826ABE61300C8C947 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
 		17518DE326A9CA6100C9465F /* JapanPatientsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapanPatientsViewModel.swift; sourceTree = "<group>"; };
 		17518DE626AA646800C9465F /* JapanDashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapanDashboard.swift; sourceTree = "<group>"; };
@@ -70,6 +78,8 @@
 		1797A60B26A5282200680A03 /* LocalPatientsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalPatientsViewModel.swift; sourceTree = "<group>"; };
 		1797A60D26A5282E00680A03 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		1797A60F26A5287F00680A03 /* LocalDashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDashboard.swift; sourceTree = "<group>"; };
+		17EC20EF26AE493900CF825A /* LocationNameList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationNameList.swift; sourceTree = "<group>"; };
+		17EC20F126AE9F7100CF825A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		17F9DFCF26A8883000D8270C /* LocalWeeklySummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalWeeklySummaryView.swift; sourceTree = "<group>"; };
 		17F9DFD126A888C800D8270C /* LocalDailySummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDailySummaryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -79,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1717592526AD1E9E0014146E /* CoreLocation.framework in Frameworks */,
 				1797A60A26A527A200680A03 /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -122,6 +133,14 @@
 			path = ChartViewsJapan;
 			sourceTree = "<group>";
 		};
+		1717592326AD1E9E0014146E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1717592426AD1E9E0014146E /* CoreLocation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		1720FE1C26ABF3A900C8C947 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,6 +158,7 @@
 			children = (
 				1797A60B26A5282200680A03 /* LocalPatientsViewModel.swift */,
 				17518DE326A9CA6100C9465F /* JapanPatientsViewModel.swift */,
+				1717592826AD24780014146E /* LocationViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -150,6 +170,7 @@
 				1797A5EE26A5279200680A03 /* OsakaCoronaTests */,
 				1797A5F926A5279200680A03 /* OsakaCoronaUITests */,
 				1797A5DB26A5279100680A03 /* Products */,
+				1717592326AD1E9E0014146E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -166,9 +187,9 @@
 		1797A5DC26A5279100680A03 /* OsakaCorona */ = {
 			isa = PBXGroup;
 			children = (
-				1797A60D26A5282E00680A03 /* DataModel.swift */,
-				17518DE526A9DF1800C9465F /* ViewModels */,
 				1797A5DD26A5279100680A03 /* OsakaCoronaApp.swift */,
+				17EC20EC26ADADE700CF825A /* Models */,
+				17518DE526A9DF1800C9465F /* ViewModels */,
 				1720FE1C26ABF3A900C8C947 /* Views */,
 				1797A5E126A5279100680A03 /* Assets.xcassets */,
 				1797A5E626A5279100680A03 /* Info.plist */,
@@ -201,6 +222,17 @@
 				1797A5FC26A5279200680A03 /* Info.plist */,
 			);
 			path = OsakaCoronaUITests;
+			sourceTree = "<group>";
+		};
+		17EC20EC26ADADE700CF825A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1797A60D26A5282E00680A03 /* DataModel.swift */,
+				17EC20EF26AE493900CF825A /* LocationNameList.swift */,
+				1717592626AD1FC90014146E /* LocationManager2.swift */,
+				17EC20F126AE9F7100CF825A /* LocationManager.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -346,12 +378,16 @@
 				17518DE726AA646800C9465F /* JapanDashboard.swift in Sources */,
 				17518DE426A9CA6100C9465F /* JapanPatientsViewModel.swift in Sources */,
 				1797A61026A5287F00680A03 /* LocalDashboard.swift in Sources */,
+				1717592926AD24780014146E /* LocationViewModel.swift in Sources */,
+				1717592726AD1FC90014146E /* LocationManager2.swift in Sources */,
 				17780B0B26A7511500DC5FD4 /* JapanMonthlySummaryView.swift in Sources */,
+				17EC20F026AE493900CF825A /* LocationNameList.swift in Sources */,
 				17F9DFD026A8883000D8270C /* LocalWeeklySummaryView.swift in Sources */,
 				1720FE1926ABE61300C8C947 /* PreferencesView.swift in Sources */,
 				1797A60E26A5282E00680A03 /* DataModel.swift in Sources */,
 				1797A5E026A5279100680A03 /* ContentView.swift in Sources */,
 				1797A5DE26A5279100680A03 /* OsakaCoronaApp.swift in Sources */,
+				17EC20F226AE9F7100CF825A /* LocationManager.swift in Sources */,
 				170A6C3826AAE97900C7D53E /* HeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -439,7 +475,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -494,7 +530,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
