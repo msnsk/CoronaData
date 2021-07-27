@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PreferencesView: View {
-    @EnvironmentObject var model: LocalPatientsViewModel
+    @EnvironmentObject var model: LocalViewModel
     let locationList = [
         "北海道",
         "青森県",

@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftUICharts
 
 struct JapanWeeklySummaryView: View {
-    @EnvironmentObject var model: JapanPatientsViewModel
+    @EnvironmentObject var model: JapanViewModel
 
     var body: some View {
         ScrollView {

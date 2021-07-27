@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct JapanDashboard: View {
-    @EnvironmentObject var model: JapanPatientsViewModel
+    @EnvironmentObject var model: JapanViewModel
     let pigments = ["24ヶ月間", "12週間", "7日間"]
     @State var selection = 0
     

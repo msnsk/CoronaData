@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class JapanPatientsViewModel: ObservableObject {
+class JapanViewModel: ObservableObject {
     @Published var japanPatientsData = [JapanPatientsDataModel]()
     @Published var japanPatientsNeedInpatient = [JapanPatientsNeedInpatientModel]()
     @Published var japanDeathsData = [JapanDeathsModel]()

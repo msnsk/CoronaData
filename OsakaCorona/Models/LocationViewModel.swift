@@ -9,7 +9,7 @@ import Foundation
 import CoreLocation
 import Combine
 
-class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
+class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
 
     private let locationManager = CLLocationManager()
     private let geocoder = CLGeocoder()
@@ -29,7 +29,6 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         guard let status = locationStatus else {
             return "unknown"
         }
-        
         switch status {
         case .notDetermined: return "notDetermined"
         case .authorizedWhenInUse: return "authorizedWhenInUse"
@@ -39,20 +38,32 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         default: return "unknown"
         }
     }
-
+    
+    func requestAuthorization() {
+        locationManager.requestWhenInUseAuthorization()
+    }
+    
+    func startUpdatingLocation() {
+        locationManager.startUpdatingLocation()
+    }
+    
+    func stopUpdatingLocation() {
+        locationManager.stopUpdatingLocation()
+    }
+    
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         locationStatus = status
-        //print(#function, statusString)
+        print(#function, statusString)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.first else { return }
         lastLocation = location
-        //(#function, location)
+        print(#function, location)
         
         //Reverse Geo Coding
         self.geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
-            if let placemark = placemarks?.first {
+            if let placemark = placemarks?.last {
                 self.adminArea = placemark.administrativeArea
                 print(#function, self.adminArea ?? "no data")
             }

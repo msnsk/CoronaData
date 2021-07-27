@@ -13,8 +13,8 @@ struct OsakaCoronaApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(JapanPatientsViewModel())
-                .environmentObject(LocalPatientsViewModel())
+                .environmentObject(JapanViewModel())
+                .environmentObject(LocalViewModel())
         }
     }
 }
