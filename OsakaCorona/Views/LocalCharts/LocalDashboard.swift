@@ -20,7 +20,7 @@ struct LocalDashboard: View {
                 .font(.title)
             
             Text("location status: \(locationVM.statusString)")
-            Text("area: \(locationVM.adminArea ?? "")")
+            Text("area: \(locationVM.area ?? "")")
             
             HeaderView(
                 newlyPatients: model.getNewlyPatientsOnLastDay(),
@@ -54,7 +54,7 @@ struct LocalDashboard: View {
         }
         .padding(.vertical, 25)
         .onAppear() {
-            model.convertLocationName(area: locationVM.adminArea)
+            model.convertLocationName(area: locationVM.area)
             model.loadPatientsData()
         }
         .onDisappear() {

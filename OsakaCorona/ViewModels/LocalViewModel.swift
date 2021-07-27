@@ -16,6 +16,7 @@ class LocalViewModel: ObservableObject {
     @Published var currentLocation: String {
         didSet {
             UserDefaults.standard.set(currentLocation, forKey:"location")
+            loadPatientsData()
         }
     }
     

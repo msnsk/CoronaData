@@ -13,12 +13,13 @@ class OtherViewModel: ObservableObject {
     @Published var loadedData = [ItemData]()
     @Published var selectedLocation: String {
         didSet {
-            UserDefaults.standard.set(selectedLocation, forKey:"location")
+            UserDefaults.standard.set(selectedLocation, forKey:"sLocation")
+            loadPatientsData()
         }
     }
     
     init() {
-        selectedLocation = UserDefaults.standard.string(forKey: "location") ?? "北海道"
+        selectedLocation = UserDefaults.standard.string(forKey: "sLocation") ?? "北海道"
         loadPatientsData()
     }
     

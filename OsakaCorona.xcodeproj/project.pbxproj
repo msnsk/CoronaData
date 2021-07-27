@@ -11,7 +11,7 @@
 		170A6C3626AAA91600C7D53E /* JapanDaylySummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170A6C3526AAA91600C7D53E /* JapanDaylySummaryView.swift */; };
 		170A6C3826AAE97900C7D53E /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170A6C3726AAE97900C7D53E /* HeaderView.swift */; };
 		1717592526AD1E9E0014146E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1717592426AD1E9E0014146E /* CoreLocation.framework */; };
-		1720FE1926ABE61300C8C947 /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1720FE1826ABE61300C8C947 /* PreferencesView.swift */; };
+		1720FE1926ABE61300C8C947 /* AreaPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1720FE1826ABE61300C8C947 /* AreaPickerView.swift */; };
 		17518DE426A9CA6100C9465F /* JapanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17518DE326A9CA6100C9465F /* JapanViewModel.swift */; };
 		17518DE726AA646800C9465F /* JapanDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17518DE626AA646800C9465F /* JapanDashboard.swift */; };
 		17726BDF26B007C20079E7F7 /* OtherDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17726BDE26B007C20079E7F7 /* OtherDashboard.swift */; };
@@ -59,7 +59,7 @@
 		170A6C3526AAA91600C7D53E /* JapanDaylySummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapanDaylySummaryView.swift; sourceTree = "<group>"; };
 		170A6C3726AAE97900C7D53E /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		1717592426AD1E9E0014146E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		1720FE1826ABE61300C8C947 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
+		1720FE1826ABE61300C8C947 /* AreaPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaPickerView.swift; sourceTree = "<group>"; };
 		17518DE326A9CA6100C9465F /* JapanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapanViewModel.swift; sourceTree = "<group>"; };
 		17518DE626AA646800C9465F /* JapanDashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapanDashboard.swift; sourceTree = "<group>"; };
 		17726BDE26B007C20079E7F7 /* OtherDashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherDashboard.swift; sourceTree = "<group>"; };
@@ -152,7 +152,7 @@
 			children = (
 				1797A5DF26A5279100680A03 /* ContentView.swift */,
 				170A6C3726AAE97900C7D53E /* HeaderView.swift */,
-				1720FE1826ABE61300C8C947 /* PreferencesView.swift */,
+				1720FE1826ABE61300C8C947 /* AreaPickerView.swift */,
 				170A6C3426AAA0D800C7D53E /* JapanCharts */,
 				170A6C3326AAA0A600C7D53E /* LocalCharts */,
 				17726BE026B007C90079E7F7 /* OtherCharts */,
@@ -163,6 +163,7 @@
 		17518DE526A9DF1800C9465F /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				17EC20F126AE9F7100CF825A /* LocationViewModel.swift */,
 				17518DE326A9CA6100C9465F /* JapanViewModel.swift */,
 				1797A60B26A5282200680A03 /* LocalViewModel.swift */,
 				17726BE726B008A70079E7F7 /* OtherViewModel.swift */,
@@ -247,7 +248,6 @@
 			children = (
 				1797A60D26A5282E00680A03 /* DataModel.swift */,
 				17EC20EF26AE493900CF825A /* AreaNameDict.swift */,
-				17EC20F126AE9F7100CF825A /* LocationViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -401,7 +401,7 @@
 				17780B0B26A7511500DC5FD4 /* JapanMonthlySummaryView.swift in Sources */,
 				17EC20F026AE493900CF825A /* AreaNameDict.swift in Sources */,
 				17F9DFD026A8883000D8270C /* LocalWeeklySummaryView.swift in Sources */,
-				1720FE1926ABE61300C8C947 /* PreferencesView.swift in Sources */,
+				1720FE1926ABE61300C8C947 /* AreaPickerView.swift in Sources */,
 				1797A60E26A5282E00680A03 /* DataModel.swift in Sources */,
 				17726BE626B008270079E7F7 /* OtherDailySummaryView.swift in Sources */,
 				1797A5E026A5279100680A03 /* ContentView.swift in Sources */,

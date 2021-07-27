@@ -1,61 +1,72 @@
 //
-//  LocationViewModel.swift
+//  LocationManager.swift
 //  OsakaCorona
 //
-//  Created by masanao on 2021/07/25.
+//  Created by masanao on 2021/07/26.
 //
 
-//import CoreLocation
-//import Combine
-//
-//final class LocationViewModel: NSObject, ObservableObject {
-//    let manager: LocationManager
-//    var cancellables = Set<AnyCancellable>()
-//    @Published var authorizationStatus = CLAuthorizationStatus.notDetermined
-//    @Published var location = CLLocation()
-//    @Published var administrativeArea = "Hokkaido"
-//
-//    init(manager: LocationManager) {
-//        self.manager = manager
-//    }
-//    
-//    func requestAuthorization() {
-//        manager.requestAuthorization()
-//    }
-//
-//    func activate() {
-//        manager.authorizationPublisher().print("dump:status").sink { [weak self] authorizationStatus in
-//            guard let self = self else { return }
-//            self.authorizationStatus = authorizationStatus
-//        }.store(in: &cancellables)
-//
-//        manager.locationPublisher().print("dump:location").sink { [weak self] locations in
-//            guard let self = self else { return }
-//            if let last = locations.last {
-//                self.location = last
-//            }
-//        }.store(in: &cancellables)
-//    }
-//
-//    func deactivate() {
-//        cancellables.removeAll()
-//    }
-//
-//    func startUpdatingLocation() {
-//        manager.startUpdatingLocation()
-//    }
-//
-//    func stopUpdatingLocation() {
-//        manager.stopUpdatingLocation()
-//    }
-//    
-//    func getCurrentLocation() {
-//        manager.lookUpCurrentLocation { location in
-//            if let location = location {
-//                if let area = location.administrativeArea {
-//                    self.administrativeArea = area
-//                }
-//            }
-//        }
-//    }
-//}
+import Foundation
+import CoreLocation
+import Combine
+
+class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
+
+    private let locationManager = CLLocationManager()
+    private let geocoder = CLGeocoder()
+    @Published var locationStatus: CLAuthorizationStatus?
+    @Published var lastLocation: CLLocation?
+    @Published var area: String?
+
+    override init() {
+        super.init()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+    }
+    
+    var statusString: String {
+        guard let status = locationStatus else {
+            return "unknown"
+        }
+        switch status {
+        case .notDetermined: return "notDetermined"
+        case .authorizedWhenInUse: return "authorizedWhenInUse"
+        case .authorizedAlways: return "authorizedAlways"
+        case .restricted: return "restricted"
+        case .denied: return "denied"
+        default: return "unknown"
+        }
+    }
+    
+    func requestAuthorization() {
+        locationManager.requestWhenInUseAuthorization()
+    }
+    
+    func startUpdatingLocation() {
+        locationManager.startUpdatingLocation()
+    }
+    
+    func stopUpdatingLocation() {
+        locationManager.stopUpdatingLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        locationStatus = status
+        print(#function, statusString)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.first else { return }
+        lastLocation = location
+        print(#function, location)
+        
+        //Reverse Geo Coding
+        self.geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
+            if let placemark = placemarks?.last {
+                self.area = placemark.administrativeArea
+                print(#function, self.area ?? "no data")
+            }
+        }
+    }
+}
