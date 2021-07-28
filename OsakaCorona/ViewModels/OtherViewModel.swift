@@ -17,17 +17,13 @@ class OtherViewModel: ObservableObject {
             loadPatientsData()
         }
     }
+    @Published var latestDateOfPatients = "Loading..."
     
     init() {
         selectedLocation = UserDefaults.standard.string(forKey: "sLocation") ?? "北海道"
         loadPatientsData()
     }
     
-    func convertLocationName(area: String?) {
-        if let areaName = area {
-            selectedLocation = areaNameDict[areaName] ?? "北海道"
-        }
-    }
     // ここから累積感染者数
     // 累積感染者数のJSONデータをデコードして取得する
     func loadPatientsData() {
@@ -57,12 +53,10 @@ class OtherViewModel: ObservableObject {
     }
     
     // 感染者データの最終日を取得する
-    func getLocalPatientsLatestDate() -> String {
-        var latestDate = "Loading..."
+    func getLatestDateOfPatients() {
         if let date = self.loadedData.last?.date {
-            latestDate = String(date)
+            self.latestDateOfPatients = String(date)
         }
-        return latestDate
     }
     
     // 最終日の累積感染者数を取得する
@@ -97,10 +91,10 @@ class OtherViewModel: ObservableObject {
         let lastDatesExceptFeb = ["-04-30", "-06-30", "-09-30", "-11-30"]
         for (index, item) in patientsAll.enumerated() {
             // 最新の日付と月違いの同じ日にちだったら配列に追加する
-            if item.0.hasSuffix(getLocalPatientsLatestDate().suffix(3)) {
+            if item.0.hasSuffix(latestDateOfPatients.suffix(3)) {
                 patientsInMonths.append(item)
                 // 最新の日付が31日か30日で、かつループのitemの日付が2月28日だった場合
-            } else if (getLocalPatientsLatestDate().hasSuffix("-31") || getLocalPatientsLatestDate().hasSuffix("-30")) && item.0.hasSuffix("-02-28") {
+            } else if (latestDateOfPatients.hasSuffix("-31") || latestDateOfPatients.hasSuffix("-30")) && item.0.hasSuffix("-02-28") {
                 // 閏年で2月29日のデータがある場合は2月29日のデータを配列に追加
                 if (patientsAll[index + 1].0.hasSuffix("-02-29")) {
                     patientsInMonths.append(patientsAll[index + 1])
@@ -111,7 +105,7 @@ class OtherViewModel: ObservableObject {
                 // 最新の日付が31日で、かつループのitemの日付が月末が30日までの月の末日の場合は30日のデータを配列に追加
             } else {
                 for date in lastDatesExceptFeb {
-                    if getLocalPatientsLatestDate().hasSuffix("-31") && item.0.hasSuffix(date) {
+                    if latestDateOfPatients.hasSuffix("-31") && item.0.hasSuffix(date) {
                         patientsInMonths.append(item)
                     }
                 }
@@ -200,10 +194,10 @@ class OtherViewModel: ObservableObject {
         let lastDatesExceptFeb = ["-04-30", "-06-30", "-09-30", "-11-30"]
         for (index, item) in patients.enumerated() {
             // データの最新の日付と月違いの同じ日にちだったら配列に追加する
-            if item.0.hasSuffix(getLocalPatientsLatestDate().suffix(3)) {
+            if item.0.hasSuffix(latestDateOfPatients.suffix(3)) {
                 patientsInMonths.append(item)
                 // データの最新の日にちが31日か30日で、かつループitemの日付が2月28日の場合
-            } else if (getLocalPatientsLatestDate().hasSuffix("-31") || getLocalPatientsLatestDate().hasSuffix("-30")) && item.0.hasSuffix("-02-28") {
+            } else if (latestDateOfPatients.hasSuffix("-31") || latestDateOfPatients.hasSuffix("-30")) && item.0.hasSuffix("-02-28") {
                 // 閏年で2月29日のデータが見つかったら2月29日のデータを配列に追加
                 if (patients[index + 1].0.hasSuffix("-02-29")) {
                     patientsInMonths.append(patients[index + 1])
@@ -214,7 +208,7 @@ class OtherViewModel: ObservableObject {
             } else {
                 for date in lastDatesExceptFeb {
                     // データの最新の日付が31日で、かつループitemの日付が月末が30日の月の末日の場合は、その末日のデータを配列に追加
-                    if getLocalPatientsLatestDate().hasSuffix("-31") && item.0.hasSuffix(date) {
+                    if latestDateOfPatients.hasSuffix("-31") && item.0.hasSuffix(date) {
                         patientsInMonths.append(item)
                     }
                 }

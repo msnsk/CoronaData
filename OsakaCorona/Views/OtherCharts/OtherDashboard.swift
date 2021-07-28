@@ -14,7 +14,7 @@ struct OtherDashboard: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            HStack {
+            HStack(spacing: 0) {
                 AreaPickerView()
                 Text("のコロナ関連データ")
                     .font(.title)
@@ -23,9 +23,9 @@ struct OtherDashboard: View {
             
             HeaderView(
                 newlyPatients: model.getNewlyPatientsOnLastDay(),
-                newlyPatientslastUpdate: model.getLocalPatientsLatestDate(),
+                newlyPatientslastUpdate: model.latestDateOfPatients,
                 comulativePatients: model.getComulativePatientsOnLastDay(),
-                comulativePatientsLastUpdate: model.getLocalPatientsLatestDate()
+                comulativePatientsLastUpdate: model.latestDateOfPatients
             )
             
             Picker(selection: $selection, label: Text("期間を選択")){
@@ -37,7 +37,7 @@ struct OtherDashboard: View {
             .padding(.horizontal, 40)
             .padding(.bottom, 16)
             
-            if model.getLocalPatientsLatestDate() != "Loading..." {
+            if model.latestDateOfPatients != "Loading..." {
                 switch selection {
                 case 0:
                     LocalMonthlySummaryView()
