@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftUICharts
 
 struct OtherWeeklySummaryView: View {
-    @EnvironmentObject var model: OtherViewModel
+    @EnvironmentObject var model: AreaViewModel
     
     var body: some View {
         ScrollView {

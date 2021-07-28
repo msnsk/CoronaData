@@ -8,54 +8,62 @@
 import Foundation
 import Combine
 
-class OtherViewModel: ObservableObject {
+class AreaViewModel: ObservableObject {
     //MARK: - Properties
     @Published var loadedData = [ItemData]() {
         didSet {
-            getLatestDateOfPatients()
+            getLatestDateOfPatientsData()
             getComulPatientsNumLastDay()
             getComulPatientsAll()
             getComulPatientsNumInMonths()
             getComulPatientsNumInWeeks()
             getComulPatientsNumInDays()
-            getNewPatientsNumLastDay()
             getNewPatientsAll()
+            getNewPatientsNumLastDay()
+            compareNewPatientsNumFromPrevDay()
             getNewPatientsNumInMonths()
             getNewPatientsNumInWeeks()
             getNewPatientsNumInDays()
         }
     }
     
-    @Published var selectedLocation: String {
+    @Published var location: String {
         didSet {
-            UserDefaults.standard.set(selectedLocation, forKey:"sLocation")
+            UserDefaults.standard.set(location, forKey:"selectedLocation")
             loadPatientsData()
         }
     }
     
     @Published var latestDateOfPatients = "Loading..."
-    @Published var comulPatientsNumLastDay = "Loading..."
+    @Published var comulPatientsNumLastDay: Int = 0
     private var comulPatientsAll = [(String, Double)]()
     @Published var comulPatientsNumInMonths = [(String, Double)]()
     @Published var comulPatientsNumInWeeks = [(String, Double)]()
     @Published var comulPatientsNumInDays = [(String, Double)]()
-    
-    @Published var newPatientsNumLastDay = "Loading..."
-    @Published var newPatientsAll = [Double]()
+    private var newPatientsAll = [Double]()
+    @Published var newPatientsNumLastDay: Int = 0
+    @Published var newPatientsNumComparedPrevDay: Int = 0
+    @Published var newPatientsRateComparedPrevDay: Double = 0.0
     @Published var newPatientsNumInMonths = [Double]()
     @Published var newPatientsNumInWeeks = [Double]()
     @Published var newPatientsNumInDays = [Double]()
     
-    //MARK: - Functions
     //MARK: - Initialize
     init() {
-        selectedLocation = UserDefaults.standard.string(forKey: "sLocation") ?? "北海道"
+        location = UserDefaults.standard.string(forKey: "selectedLocation") ?? "北海道"
         loadPatientsData()
+    }
+    
+    //MARK: - Functions
+    func convertLocationName(area: String?) {
+        if let areaName = area {
+            location = areaNameDict[areaName] ?? ""
+        }
     }
     
     //MARK: - 感染者数のJSONデータをデコードして取得
     func loadPatientsData() {
-        guard let encodedLocation = self.selectedLocation.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+        guard let encodedLocation = self.location.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
             return
         }
         let completeURL = "https://opendata.corona.go.jp/api/Covid19JapanAll" + "?dataName=" + encodedLocation
@@ -81,7 +89,7 @@ class OtherViewModel: ObservableObject {
     }
     
     //MARK: - 感染者データの最終日を取得する
-    func getLatestDateOfPatients() {
+    func getLatestDateOfPatientsData() {
         if let date = self.loadedData.last?.date {
             self.latestDateOfPatients = String(date)
         }
@@ -91,16 +99,18 @@ class OtherViewModel: ObservableObject {
     // 最終日の累積感染者数を取得する
     func getComulPatientsNumLastDay() {
         if let patients = self.loadedData.last?.npatients {
-            comulPatientsNumLastDay = patients
+            comulPatientsNumLastDay = Int(patients) ?? 0
         }
     }
     
     // 全期間の累積感染者数を出力する
     func getComulPatientsAll() {
+        var comulPatients = [(String, Double)]()
         for item in loadedData {
             guard let num = Double(item.npatients) else { continue }
-            comulPatientsAll.append((item.date, num))
+            comulPatients.append((item.date, num))
         }
+        comulPatientsAll = comulPatients
     }
     //　24ヶ月間の累積感染者数を取得する
     func getComulPatientsNumInMonths() {
@@ -145,15 +155,15 @@ class OtherViewModel: ObservableObject {
     // 12週間の累積感染者数を取得する
     func getComulPatientsNumInWeeks() {
         var patients = [(String, Double)]()
-        for (index, item) in comulPatientsAll.enumerated() {
+        for (index, item) in comulPatientsAll.reversed().enumerated() {
             if index == 0 || (index + 1) % 7 == 0 {
                 patients.append(item)
             }
         }
         if patients.count >= 12 {
-            comulPatientsNumInWeeks = Array(patients.suffix(12))
+            comulPatientsNumInWeeks = Array(patients.prefix(12).reversed())
         } else {
-            comulPatientsNumInWeeks = patients
+            comulPatientsNumInWeeks = patients.reversed()
         }
     }
     // 7日間の累積感染者数を取得する
@@ -167,20 +177,8 @@ class OtherViewModel: ObservableObject {
     }
     
     //MARK: - 新規感染者
-    // 最終日の新規感染者数を取得
-    func getNewPatientsNumLastDay() {
-        if let patients = self.loadedData.last?.npatients {
-            if let comulativeLastDay = Int(patients) {
-                if let comulativePreviousDay = Int(self.loadedData[self.loadedData.count-2].npatients) {
-                    newPatientsNumLastDay = String(comulativeLastDay - comulativePreviousDay)
-                }
-            }
-        }
-    }
-    
     // 全期間の新規患者数を出力する
     func getNewPatientsAll() {
-        // 累積陽性患者数の配列を作成
         var comulativePatinets = [Double]()
         for item in loadedData {
             guard let num = Double(item.npatients) else { continue }
@@ -196,6 +194,18 @@ class OtherViewModel: ObservableObject {
         }
         newPatientsAll = differences
     }
+    
+    // 最終日の新規感染者数を取得
+    func getNewPatientsNumLastDay() {
+        newPatientsNumLastDay = Int(newPatientsAll[newPatientsAll.count - 1])
+    }
+    
+    // 最終日の感染者数の前日との差と比を出力
+    func compareNewPatientsNumFromPrevDay() {
+        newPatientsNumComparedPrevDay = Int(newPatientsAll[newPatientsAll.count - 1] - newPatientsAll[newPatientsAll.count - 2])
+        newPatientsRateComparedPrevDay = newPatientsAll[newPatientsAll.count - 1] / newPatientsAll[newPatientsAll.count - 2] * 100
+    }
+    
     // 24ヶ月間の新規感染者数を取得する
     func getNewPatientsNumInMonths() {
         let comulativePatients = self.loadedData
@@ -245,15 +255,15 @@ class OtherViewModel: ObservableObject {
     // 12週間の新規感染者数を取得する
     func getNewPatientsNumInWeeks() {
         var patients = [Double]()
-        for (index, item) in newPatientsAll.enumerated() {
+        for (index, item) in newPatientsAll.reversed().enumerated() {
             if index == 0 || (index + 1) % 7 == 0 {
                 patients.append(item)
             }
         }
         if patients.count >= 12 {
-            newPatientsNumInWeeks = Array(patients.suffix(12))
+            newPatientsNumInWeeks = Array(patients.prefix(12).reversed())
         } else {
-            newPatientsNumInWeeks = patients
+            newPatientsNumInWeeks = patients.reversed()
         }
     }
     // 7日間の新規感染者数を取得する

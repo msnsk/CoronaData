@@ -18,7 +18,7 @@
 		17726BE226B008050079E7F7 /* OtherMonthlySummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17726BE126B008050079E7F7 /* OtherMonthlySummaryView.swift */; };
 		17726BE426B008180079E7F7 /* OtherWeeklySummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17726BE326B008180079E7F7 /* OtherWeeklySummaryView.swift */; };
 		17726BE626B008270079E7F7 /* OtherDailySummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17726BE526B008270079E7F7 /* OtherDailySummaryView.swift */; };
-		17726BE826B008A70079E7F7 /* OtherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17726BE726B008A70079E7F7 /* OtherViewModel.swift */; };
+		17726BE826B008A70079E7F7 /* AreaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17726BE726B008A70079E7F7 /* AreaViewModel.swift */; };
 		17780B0926A742F200DC5FD4 /* LocalMonthlySummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17780B0826A742F200DC5FD4 /* LocalMonthlySummaryView.swift */; };
 		17780B0B26A7511500DC5FD4 /* JapanMonthlySummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17780B0A26A7511500DC5FD4 /* JapanMonthlySummaryView.swift */; };
 		1797A5DE26A5279100680A03 /* OsakaCoronaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1797A5DD26A5279100680A03 /* OsakaCoronaApp.swift */; };
@@ -66,7 +66,7 @@
 		17726BE126B008050079E7F7 /* OtherMonthlySummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherMonthlySummaryView.swift; sourceTree = "<group>"; };
 		17726BE326B008180079E7F7 /* OtherWeeklySummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherWeeklySummaryView.swift; sourceTree = "<group>"; };
 		17726BE526B008270079E7F7 /* OtherDailySummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherDailySummaryView.swift; sourceTree = "<group>"; };
-		17726BE726B008A70079E7F7 /* OtherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherViewModel.swift; sourceTree = "<group>"; };
+		17726BE726B008A70079E7F7 /* AreaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaViewModel.swift; sourceTree = "<group>"; };
 		17780B0826A742F200DC5FD4 /* LocalMonthlySummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalMonthlySummaryView.swift; sourceTree = "<group>"; };
 		17780B0A26A7511500DC5FD4 /* JapanMonthlySummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapanMonthlySummaryView.swift; sourceTree = "<group>"; };
 		1797A5DA26A5279100680A03 /* OsakaCorona.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OsakaCorona.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -166,7 +166,7 @@
 				17EC20F126AE9F7100CF825A /* LocationViewModel.swift */,
 				17518DE326A9CA6100C9465F /* JapanViewModel.swift */,
 				1797A60B26A5282200680A03 /* LocalViewModel.swift */,
-				17726BE726B008A70079E7F7 /* OtherViewModel.swift */,
+				17726BE726B008A70079E7F7 /* AreaViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -392,7 +392,7 @@
 				170A6C3626AAA91600C7D53E /* JapanDaylySummaryView.swift in Sources */,
 				1797A60C26A5282200680A03 /* LocalViewModel.swift in Sources */,
 				170A6C3226AAA04600C7D53E /* JapanWeeklySummaryView.swift in Sources */,
-				17726BE826B008A70079E7F7 /* OtherViewModel.swift in Sources */,
+				17726BE826B008A70079E7F7 /* AreaViewModel.swift in Sources */,
 				17518DE726AA646800C9465F /* JapanDashboard.swift in Sources */,
 				17518DE426A9CA6100C9465F /* JapanViewModel.swift in Sources */,
 				17726BE426B008180079E7F7 /* OtherWeeklySummaryView.swift in Sources */,

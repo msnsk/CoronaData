@@ -16,7 +16,7 @@ struct OsakaCoronaApp: App {
             ContentView()
                 .environmentObject(JapanViewModel())
                 .environmentObject(LocalViewModel())
-                .environmentObject(OtherViewModel())
+                .environmentObject(AreaViewModel())
         }
     }
 }

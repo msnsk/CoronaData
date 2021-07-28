@@ -15,14 +15,14 @@ struct LocalWeeklySummaryView: View {
         ScrollView {
             LazyVStack(spacing: 30) {
                 LineChartView(
-                    data: self.model.getLocalNewlyPatientsInWeeks(),
+                    data: self.model.newPatientsNumInWeeks,
                     title: "新規感染者数",
                     legend: "過去12週間",
                     form: ChartForm.large,
                     valueSpecifier: "%.0f"
                 )
                 BarChartView(
-                    data: ChartData(values: self.model.getLocalComulativePatientsInWeeks()),
+                    data: ChartData(values: self.model.comulPatientsNumInWeeks),
                     title: "累積感染者数",
                     legend: "過去12週間",
                     form: ChartForm.extraLarge,

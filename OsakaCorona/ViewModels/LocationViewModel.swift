@@ -60,10 +60,9 @@ class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         guard let location = locations.first else { return }
         lastLocation = location
         print(#function, location)
-        
-        //Reverse Geo Coding
         self.geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
             if let placemark = placemarks?.last {
+                self.locationManager.stopUpdatingLocation()
                 self.area = placemark.administrativeArea
                 print(#function, self.area ?? "no data")
             }

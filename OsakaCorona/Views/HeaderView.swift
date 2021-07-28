@@ -8,27 +8,39 @@
 import SwiftUI
 
 struct HeaderView: View {
-    let newlyPatients: String
-    let newlyPatientslastUpdate: String
-    let comulativePatients: String
-    let comulativePatientsLastUpdate: String
-    var newlyDeaths: String? = nil
-    var newlyDeathsLastUpdate: String? = nil
-    var comulativeDeaths: String? = nil
-    var comulativeDeathsLastUpdate: String? = nil
+    let newPatients: Int
+    let newPatientslastUpdate: String
+    let newPatientsComparison: Int
+    let newPatientsComparisonRate: Double
+    let comulPatients: Int
+    let comulPatientsLastUpdate: String
+    var newDeaths: String? = nil
+    var newDeathsLastUpdate: String? = nil
+    var comulDeaths: String? = nil
+    var comulDeathsLastUpdate: String? = nil
     
     var body: some View {
         HStack(spacing: 10){
-            VStack {
-                HStack {
+            VStack(spacing: 3) {
+                HStack(spacing: 1) {
                     Image(systemName: "waveform.path.ecg")
                     Text("新規感染者")
+                }
+                Text("\(newPatients)")
+                    .font(.system(size: 40, weight: .bold, design: .default))
+                HStack {
+                    Image(systemName: newPatientsComparison > 0 ? "arrowtriangle.up.fill" : "arrowtriangle.down.fill")
+                        .font(.title2)
+                        .foregroundColor(newPatientsComparison > 0 ? .red : Color(.systemGreen))
+                    Text("\(newPatientsComparison)")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                    Text(String(format: "%.2f", "\(newPatientsComparisonRate)%"))
+                        .font(.caption)
                         .fontWeight(.light)
                 }
-                Text(self.newlyPatients)
-                    .font(.system(size: 40, weight: .bold, design: .default))
-                Text(self.newlyPatientslastUpdate)
-                    .font(.caption2)
+                Text(newPatientslastUpdate)
+                    .font(.caption)
                     .fontWeight(.light)
             }
             .padding()
@@ -37,16 +49,27 @@ struct HeaderView: View {
                     .foregroundColor(.white)
                     .shadow(radius: 5)
             )
-            VStack {
-                HStack {
+            VStack(spacing: 3) {
+                HStack(spacing: 1) {
                     Image(systemName: "chart.bar.fill")
                     Text("累積感染者")
+                        .fontWeight(.regular)
+                }
+                Text("\(comulPatients)")
+                    .font(.system(size: 40, weight: .bold, design: .default))
+                HStack {
+                    Image(systemName: "plus")
+                        .font(.title2)
+                        .foregroundColor(newPatientsComparisonRate >= 50 ? .red : Color(.systemGreen))
+                    Text("\(newPatients)")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                    Text(String(format: "%.2f", "\(newPatientsComparisonRate)%"))
+                        .font(.caption)
                         .fontWeight(.light)
                 }
-                Text(self.comulativePatients)
-                    .font(.system(size: 40, weight: .bold, design: .default))
-                Text(self.comulativePatientsLastUpdate)
-                    .font(.caption2)
+                Text(comulPatientsLastUpdate)
+                    .font(.caption)
                     .fontWeight(.light)
             }
             .padding()
@@ -55,17 +78,17 @@ struct HeaderView: View {
                     .foregroundColor(.white)
                     .shadow(radius: 5)
             )
-            if let newlyDeaths = self.newlyDeaths {
+            if let newlyDeaths = self.newDeaths {
                 VStack {
                     HStack {
                         Image(systemName: "waveform.path.ecg")
                         Text("新規死亡者")
-                            .fontWeight(.light)
+                            .fontWeight(.regular)
                     }
                     Text(newlyDeaths)
                         .font(.system(size: 40, weight: .bold, design: .default))
-                    Text(self.newlyDeathsLastUpdate ?? "")
-                        .font(.caption2)
+                    Text(self.newDeathsLastUpdate ?? "")
+                        .font(.caption)
                         .fontWeight(.light)
                 }
                 .padding()
@@ -75,17 +98,17 @@ struct HeaderView: View {
                         .shadow(radius: 5)
                 )
             }
-            if let comulativeDeaths = self.comulativeDeaths {
+            if let comulativeDeaths = self.comulDeaths {
                 VStack {
                     HStack {
                         Image(systemName: "chart.bar.fill")
                         Text("累積死亡者")
-                            .fontWeight(.light)
+                            .fontWeight(.regular)
                     }
                     Text(comulativeDeaths)
                         .font(.system(size: 40, weight: .bold, design: .default))
-                    Text(self.comulativeDeathsLastUpdate ?? "")
-                        .font(.caption2)
+                    Text(self.comulDeathsLastUpdate ?? "")
+                        .font(.caption)
                         .fontWeight(.light)
                 }
                 .padding()
@@ -103,12 +126,12 @@ struct HeaderView: View {
 
 struct HeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        HeaderView(newlyPatients: "456", newlyPatientslastUpdate: "2021-07-23", comulativePatients: "123456", comulativePatientsLastUpdate: "2021-07-23", newlyDeaths: "81" , newlyDeathsLastUpdate: "2021-07-23" , comulativeDeaths: "15101" , comulativeDeathsLastUpdate: "2021-07-23" )
+        HeaderView(newPatients: 456, newPatientslastUpdate: "2021-07-23", newPatientsComparison: 121, newPatientsComparisonRate: 1.1, comulPatients: 123456, comulPatientsLastUpdate: "2021-07-23", newDeaths: "81" , newDeathsLastUpdate: "2021-07-23" , comulDeaths: "15101" , comulDeathsLastUpdate: "2021-07-23" )
     }
 }
 
 struct HeaderView_Previews2: PreviewProvider {
     static var previews: some View {
-        HeaderView(newlyPatients: "456", newlyPatientslastUpdate: "2021-07-23", comulativePatients: "123456", comulativePatientsLastUpdate: "2021-07-23")
+        HeaderView(newPatients: 456, newPatientslastUpdate: "2021-07-23", newPatientsComparison: 121, newPatientsComparisonRate: 1.1, comulPatients: 123456, comulPatientsLastUpdate: "2021-07-23")
     }
 }

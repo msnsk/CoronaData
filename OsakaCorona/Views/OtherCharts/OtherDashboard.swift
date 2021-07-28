@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct OtherDashboard: View {
-    @EnvironmentObject var model: OtherViewModel
+    @EnvironmentObject var model: AreaViewModel
     @State var selection = 0
     let pigments = ["24ヶ月間", "12週間", "7日間"]
     
@@ -20,12 +20,13 @@ struct OtherDashboard: View {
                     .font(.title)
             }
             
-            
             HeaderView(
-                newlyPatients: model.newPatientsNumLastDay,
-                newlyPatientslastUpdate: model.latestDateOfPatients,
-                comulativePatients: model.comulPatientsNumLastDay,
-                comulativePatientsLastUpdate: model.latestDateOfPatients
+                newPatients: model.newPatientsNumLastDay,
+                newPatientslastUpdate: model.latestDateOfPatients,
+                newPatientsComparison: model.newPatientsNumComparedPrevDay,
+                newPatientsComparisonRate: model.newPatientsRateComparedPrevDay,
+                comulPatients: model.comulPatientsNumLastDay,
+                comulPatientsLastUpdate: model.latestDateOfPatients
             )
             
             Picker(selection: $selection, label: Text("期間を選択")){

@@ -19,14 +19,16 @@ struct JapanDashboard: View {
             
             ScrollView(.horizontal) {
                 HeaderView(
-                    newlyPatients: model.getNewlyPatientsOnLastDay(),
-                    newlyPatientslastUpdate: model.getJapanPatientsLatestDate(),
-                    comulativePatients: model.getComulativePatientsOnLastDay(),
-                    comulativePatientsLastUpdate: model.getJapanPatientsLatestDate(),
-                    newlyDeaths: model.getJapanaNewlyDeathsOnLastDay(),
-                    newlyDeathsLastUpdate: model.getJapanDeathsLatestDate(),
-                    comulativeDeaths: model.getJapanComulativeDeathsOnLastDay(),
-                    comulativeDeathsLastUpdate: model.getJapanDeathsLatestDate()
+                    newPatients: model.getNewlyPatientsOnLastDay(),
+                    newPatientslastUpdate: model.getJapanPatientsLatestDate(),
+                    newPatientsComparison: 0,
+                    newPatientsComparisonRate: 0.0,
+                    comulPatients: model.getComulativePatientsOnLastDay(),
+                    comulPatientsLastUpdate: model.getJapanPatientsLatestDate(),
+                    newDeaths: model.getJapanaNewlyDeathsOnLastDay(),
+                    newDeathsLastUpdate: model.getJapanDeathsLatestDate(),
+                    comulDeaths: model.getJapanComulativeDeathsOnLastDay(),
+                    comulDeathsLastUpdate: model.getJapanDeathsLatestDate()
                 )
             }
             

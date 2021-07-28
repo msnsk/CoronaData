@@ -9,11 +9,16 @@ import Foundation
 import Combine
 
 class JapanViewModel: ObservableObject {
+    //MARK: - Properties
     @Published var japanPatientsData = [JapanPatientsDataModel]()
     @Published var japanPatientsNeedInpatient = [JapanPatientsNeedInpatientModel]()
     @Published var japanDeathsData = [JapanDeathsModel]()
     @Published var prefecturePatientsData = [Area]()
     
+    @Published var newPatientsNumComparedPrevDay: Int = 0
+    @Published var newPatientsRateComparedPrevDay: Double = 0.0
+    
+    //MARK: - Initialize
     init() {
         self.loadJapanPatientsData()
         self.loadJapanPatientsNeedInpatientData()
@@ -21,6 +26,7 @@ class JapanViewModel: ObservableObject {
         self.loadPrefectureComulativePatients()
     }
     
+    //MARK: - Load JSON Data
     func loadJapanPatientsData() {
         guard let url = URL(string: "https://data.corona.go.jp/converted-json/covid19japan-npatients.json") else {
             print("Japan Patient: Invalid URL")
@@ -41,6 +47,9 @@ class JapanViewModel: ObservableObject {
         }.resume()
         
     }
+    
+    //MARK: - Functions
+    
     // 累積感染者数のデータの最終更新日を取得する
     func getJapanPatientsLatestDate() -> String {
         var latestDate = "Loading..."
@@ -49,11 +58,13 @@ class JapanViewModel: ObservableObject {
         }
         return latestDate
     }
+    
+    //MARK: - 累積感染者数
     // 最終更新日の累積感染者数を取得する
-    func getComulativePatientsOnLastDay() -> String {
-        var comulativePatientsLastDay = "Loading..."
+    func getComulativePatientsOnLastDay() -> Int {
+        var comulativePatientsLastDay = 0
         if let patients = self.japanPatientsData.last?.npatients {
-            comulativePatientsLastDay = String(patients)
+            comulativePatientsLastDay = patients
         }
         return comulativePatientsLastDay
     }
@@ -118,15 +129,22 @@ class JapanViewModel: ObservableObject {
         }
     }
     
-    // ここから新規感染者
+    //MARK: - 新規感染者
     // 最終更新日の新規感染者数を取得する
-    func getNewlyPatientsOnLastDay() -> String {
-        var NewlyPatientsLastDay = "Loading..."
-        if let patients = self.japanPatientsData.last?.adpatients {
-            NewlyPatientsLastDay = String(patients)
+    func getNewlyPatientsOnLastDay() -> Int {
+        var NewlyPatientsLastDay = 0
+        if let patients = japanPatientsData.last?.adpatients {
+            NewlyPatientsLastDay = patients
         }
         return NewlyPatientsLastDay
     }
+    
+    // 最終日の感染者数の前日との差と比を出力
+    func compareNewPatientsNumFromPrevDay() {
+        newPatientsNumComparedPrevDay = japanPatientsData[0].adpatients - japanPatientsData[1].adpatients
+        newPatientsRateComparedPrevDay = Double(japanPatientsData[0].adpatients / japanPatientsData[1].adpatients * 100)
+    }
+    
     // 24ヶ月間の新規感染者数を取得する
     func getJapanNewlyPatientsInMonths() -> [Double] {
         let comulativePatients = self.japanPatientsData

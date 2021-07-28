@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AreaPickerView: View {
-    @EnvironmentObject var model: OtherViewModel
+    @EnvironmentObject var model: AreaViewModel
     let locationList = [
         "北海道",
         "青森県",
@@ -59,7 +59,7 @@ struct AreaPickerView: View {
         "沖縄県",
     ]
     var body: some View {
-        Picker(selection: self.$model.selectedLocation, label: Text("\(model.selectedLocation)").font(.title), content: {
+        Picker(selection: self.$model.location, label: Text("\(model.location)").font(.title), content: {
             ForEach(0..<self.locationList.count) { index in
                 Text(self.locationList[index]).tag(self.locationList[index])
             }
@@ -72,6 +72,6 @@ struct AreaPickerView: View {
 struct PreferencesView_Previews: PreviewProvider {
     static var previews: some View {
         AreaPickerView()
-            .environmentObject(OtherViewModel())
+            .environmentObject(AreaViewModel())
     }
 }

@@ -16,17 +16,19 @@ struct LocalDashboard: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            Text("\(model.currentLocation)のコロナ関連データ")
+            Text("\(model.location)のコロナ関連データ")
                 .font(.title)
             
             Text("location status: \(locationVM.statusString)")
             Text("area: \(locationVM.area ?? "")")
             
             HeaderView(
-                newlyPatients: model.getNewlyPatientsOnLastDay(),
-                newlyPatientslastUpdate: model.getLocalPatientsLatestDate(),
-                comulativePatients: model.getComulativePatientsOnLastDay(),
-                comulativePatientsLastUpdate: model.getLocalPatientsLatestDate()
+                newPatients: model.newPatientsNumLastDay,
+                newPatientslastUpdate: model.latestDateOfPatients,
+                newPatientsComparison: model.newPatientsNumComparedPrevDay,
+                newPatientsComparisonRate: model.newPatientsRateComparedPrevDay,
+                comulPatients: model.comulPatientsNumLastDay,
+                comulPatientsLastUpdate: model.latestDateOfPatients
             )
             
             Picker(selection: $selection, label: Text("期間を選択")){
@@ -38,7 +40,7 @@ struct LocalDashboard: View {
             .padding(.horizontal, 40)
             .padding(.bottom, 16)
             
-            if model.getLocalPatientsLatestDate() != "Loading..." {
+            if model.latestDateOfPatients != "Loading..." {
                 switch selection {
                 case 0:
                     LocalMonthlySummaryView()
@@ -55,7 +57,7 @@ struct LocalDashboard: View {
         .padding(.vertical, 25)
         .onAppear() {
             model.convertLocationName(area: locationVM.area)
-            model.loadPatientsData()
+//            model.loadPatientsData()
         }
         .onDisappear() {
             locationVM.stopUpdatingLocation()
@@ -64,7 +66,6 @@ struct LocalDashboard: View {
 }
 
 struct Infected_Previews: PreviewProvider {
-    //static let locationViewModel = LocationViewModel(model: LocationDataSource())
     static var previews: some View {
         LocalDashboard()
     }
