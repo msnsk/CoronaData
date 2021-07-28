@@ -15,14 +15,14 @@ struct OtherDailySummaryView: View {
         ScrollView {
             LazyVStack(spacing: 30) {
                 LineChartView(
-                    data: self.model.getLocalNewlyPatientsInDays(),
+                    data: self.model.newPatientsNumInDays,
                     title: "新規感染者数",
                     legend: "過去7日間",
                     form: ChartForm.large,
                     valueSpecifier: "%.0f"
                 )
                 BarChartView(
-                    data: ChartData(values: self.model.getLocalComulativePatientsInDays()),
+                    data: ChartData(values: self.model.comulPatientsNumInDays),
                     title: "累積感染者数",
                     legend: "過去7日間",
                     form: ChartForm.extraLarge,

@@ -22,9 +22,9 @@ struct OtherDashboard: View {
             
             
             HeaderView(
-                newlyPatients: model.getNewlyPatientsOnLastDay(),
+                newlyPatients: model.newPatientsNumLastDay,
                 newlyPatientslastUpdate: model.latestDateOfPatients,
-                comulativePatients: model.getComulativePatientsOnLastDay(),
+                comulativePatients: model.comulPatientsNumLastDay,
                 comulativePatientsLastUpdate: model.latestDateOfPatients
             )
             
@@ -40,13 +40,13 @@ struct OtherDashboard: View {
             if model.latestDateOfPatients != "Loading..." {
                 switch selection {
                 case 0:
-                    LocalMonthlySummaryView()
+                    OtherMonthlySummaryView()
                 case 1:
-                    LocalWeeklySummaryView()
+                    OtherWeeklySummaryView()
                 case 2:
-                    LocalDailySummaryView()
+                    OtherDailySummaryView()
                 default:
-                    LocalMonthlySummaryView()
+                    OtherMonthlySummaryView()
                 }
             }
             Spacer()
