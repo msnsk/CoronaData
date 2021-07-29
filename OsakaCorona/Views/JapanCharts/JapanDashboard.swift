@@ -19,16 +19,22 @@ struct JapanDashboard: View {
             
             ScrollView(.horizontal) {
                 HeaderView(
-                    newPatients: model.getNewlyPatientsOnLastDay(),
-                    newPatientslastUpdate: model.getJapanPatientsLatestDate(),
-                    newPatientsComparison: 0,
-                    newPatientsComparisonRate: 0.0,
-                    comulPatients: model.getComulativePatientsOnLastDay(),
-                    comulPatientsLastUpdate: model.getJapanPatientsLatestDate(),
-                    newDeaths: model.getJapanaNewlyDeathsOnLastDay(),
-                    newDeathsLastUpdate: model.getJapanDeathsLatestDate(),
-                    comulDeaths: model.getJapanComulativeDeathsOnLastDay(),
-                    comulDeathsLastUpdate: model.getJapanDeathsLatestDate()
+                    isJapanViewModel: true,
+                    newPatients: model.newPatientsNumLastDay,
+                    newPatientslastUpdate: model.latestDateOfPatientsData,
+                    newPatientsComparison: model.newPatientsNumComparedPrevDay,
+                    newPatientsComparisonRate: model.newPatientsRateComparedPrevDay,
+                    comulPatients: model.comulPatientsNumsLastDay,
+                    comulPatientsLastUpdate: model.latestDateOfPatientsData,
+                    comulPatientsComparisonRate: model.comulPatientsRateComparedPrevDay,
+                    
+                    newDeaths: model.newDeathsLastDay,
+                    newDeathsLastUpdate: model.latestDateOfDeathsData,
+                    newDeathsComparison: model.newDeathsComparedPrevDay,
+                    newDeathsComparisonRate: model.newDeathsRateComparedPrevDay,
+                    comulDeaths: model.comulDeathsLastDay,
+                    comulDeathsLastUpdate: model.latestDateOfDeathsData,
+                    comulDeathsComparisonRate: model.comulDeathsRateComparedPrevDay
                 )
             }
             
@@ -41,7 +47,7 @@ struct JapanDashboard: View {
             .padding(.horizontal, 40)
             .padding(.bottom, 16)
             
-            if model.getJapanPatientsLatestDate() != "Loading..." {
+            if model.latestDateOfPatientsData != "Loading..." {
                 switch selection {
                 case 0:
                     JapanMonthlySummaryView()

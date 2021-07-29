@@ -14,11 +14,13 @@ class LocalViewModel: ObservableObject {
     @Published var loadedData = [ItemData]() {
         didSet {
             getLatestDateOfPatientsData()
-            getComulPatientsNumLastDay()
             getComulPatientsAll()
+            getComulPatientsNumLastDay()
+            getComulPatientsRateComparedPrevDay()
             getComulPatientsNumInMonths()
             getComulPatientsNumInWeeks()
             getComulPatientsNumInDays()
+            
             getNewPatientsAll()
             getNewPatientsNumLastDay()
             compareNewPatientsNumFromPrevDay()
@@ -36,15 +38,17 @@ class LocalViewModel: ObservableObject {
     }
     
     @Published var latestDateOfPatients = "Loading..."
-    @Published var comulPatientsNumLastDay: Int = 0
     private var comulPatientsAll = [(String, Double)]()
+    @Published var comulPatientsNumLastDay: Int = 0
+    @Published var comulPatientsRateComparedPrevDay: Double = 0.00
     @Published var comulPatientsNumInMonths = [(String, Double)]()
     @Published var comulPatientsNumInWeeks = [(String, Double)]()
     @Published var comulPatientsNumInDays = [(String, Double)]()
+    
     private var newPatientsAll = [Double]()
     @Published var newPatientsNumLastDay: Int = 0
     @Published var newPatientsNumComparedPrevDay: Int = 0
-    @Published var newPatientsRateComparedPrevDay: Double = 0.0
+    @Published var newPatientsRateComparedPrevDay: Double = 0.00
     @Published var newPatientsNumInMonths = [Double]()
     @Published var newPatientsNumInWeeks = [Double]()
     @Published var newPatientsNumInDays = [Double]()
@@ -95,13 +99,6 @@ class LocalViewModel: ObservableObject {
     }
     
     //MARK: - Comulative Patients
-    // 最終日の累積感染者数を取得する
-    func getComulPatientsNumLastDay() {
-        if let patients = self.loadedData.last?.npatients {
-            comulPatientsNumLastDay = Int(patients) ?? 0
-        }
-    }
-    
     // 全期間の累積感染者数を出力する
     func getComulPatientsAll() {
         var comulativePatients = [(String, Double)]()
@@ -111,6 +108,21 @@ class LocalViewModel: ObservableObject {
         }
         comulPatientsAll = comulativePatients
     }
+    
+    // 最終日の累積感染者数を取得する
+    func getComulPatientsNumLastDay() {
+        if let patients = self.loadedData.last?.npatients {
+            comulPatientsNumLastDay = Int(patients) ?? 0
+        }
+    }
+    
+    // 最終日の累積感染者数とその前日の値を比較する
+    func getComulPatientsRateComparedPrevDay() {
+        guard let lastNum = Double(loadedData[loadedData.count - 1].npatients) else { return }
+        guard let prevNum = Double(loadedData[loadedData.count - 2].npatients) else { return }
+        comulPatientsRateComparedPrevDay = (lastNum - prevNum) / prevNum * 100
+    }
+    
     //　24ヶ月間の累積感染者数を取得する
     func getComulPatientsNumInMonths() {
         let patientsData = self.loadedData
@@ -203,8 +215,10 @@ class LocalViewModel: ObservableObject {
     
     // 最終日の感染者数の前日との差と比を出力
     func compareNewPatientsNumFromPrevDay() {
-        newPatientsNumComparedPrevDay = Int(newPatientsAll[newPatientsAll.count - 1] - newPatientsAll[newPatientsAll.count - 2])
-        newPatientsRateComparedPrevDay = newPatientsAll[newPatientsAll.count - 1] / newPatientsAll[newPatientsAll.count - 2] * 100
+        let lastNum = newPatientsAll[newPatientsAll.count - 1]
+        let prevNum = newPatientsAll[newPatientsAll.count - 2]
+        newPatientsNumComparedPrevDay = Int(lastNum) - Int(prevNum)
+        newPatientsRateComparedPrevDay = (lastNum - prevNum) / prevNum * 100
     }
     // 24ヶ月間の新規感染者数を取得する
     func getNewPatientsNumInMonths() {

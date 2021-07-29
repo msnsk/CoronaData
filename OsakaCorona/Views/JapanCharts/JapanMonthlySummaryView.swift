@@ -15,7 +15,7 @@ struct JapanMonthlySummaryView: View {
         ScrollView {
             LazyVStack(spacing: 30) {
                 LineChartView(
-                    data: self.model.getJapanNewlyPatientsInMonths(),
+                    data: self.model.newPatientsNumsInMonths,
                     title: "新規陽性者数",
                     legend: "過去24ヶ月間",
                     //style: <#T##ChartStyle#>,
@@ -25,7 +25,7 @@ struct JapanMonthlySummaryView: View {
                     valueSpecifier: "%.0f"
                 )
                 BarChartView(
-                    data: ChartData(values: model.getJapanComulativePatientsInMonths()),
+                    data: ChartData(values: model.comulPatientsNumsInMonths),
                     title: "累積陽性者数",
                     legend: "過去24ヶ月間",
                     //style: <#T##ChartStyle#>,
@@ -37,7 +37,7 @@ struct JapanMonthlySummaryView: View {
                     animatedToBack: true
                 )
                 LineChartView(
-                    data: self.model.getJapanNewlyDeathsInMonths(),
+                    data: self.model.newDeathsInMonths,
                     title: "新規死亡者数",
                     legend: "過去24ヶ月間",
                     //style: <#T##ChartStyle#>,
@@ -47,7 +47,7 @@ struct JapanMonthlySummaryView: View {
                     valueSpecifier: "%.0f"
                 )
                 BarChartView(
-                    data: ChartData(values: model.getJapanComulativeDeathsInMonths()),
+                    data: ChartData(values: model.comulDeathsInMonths),
                     title: "累積死亡者数",
                     legend: "過去24ヶ月間",
                     //style: <#T##ChartStyle#>,
@@ -58,7 +58,7 @@ struct JapanMonthlySummaryView: View {
                     valueSpecifier: "%.0f"
                 )
                 LineChartView(
-                    data: self.model.getJapanPatientsNeedInpatientInMonths(),
+                    data: self.model.needInpatientNumsInMonths,
                     title: "入院治療等を要する者",
                     legend: "過去24ヶ月間",
                     //style: <#T##ChartStyle#>,
@@ -68,7 +68,7 @@ struct JapanMonthlySummaryView: View {
                     valueSpecifier: "%.0f"
                 )
                 BarChartView(
-                    data: ChartData(values: model.getPrefectureComulativePatients()),
+                    data: ChartData(values: model.prefectureComulPatientsNum),
                     title: "都道府県別累積陽性者数",
                     legend: "最終更新日の15位まで",
                     //style: <#T##ChartStyle#>,

@@ -19,16 +19,15 @@ struct LocalDashboard: View {
             Text("\(model.location)のコロナ関連データ")
                 .font(.title)
             
-            Text("location status: \(locationVM.statusString)")
-            Text("area: \(locationVM.area ?? "")")
-            
             HeaderView(
+                isJapanViewModel: false,
                 newPatients: model.newPatientsNumLastDay,
                 newPatientslastUpdate: model.latestDateOfPatients,
                 newPatientsComparison: model.newPatientsNumComparedPrevDay,
                 newPatientsComparisonRate: model.newPatientsRateComparedPrevDay,
                 comulPatients: model.comulPatientsNumLastDay,
-                comulPatientsLastUpdate: model.latestDateOfPatients
+                comulPatientsLastUpdate: model.latestDateOfPatients,
+                comulPatientsComparisonRate: model.comulPatientsRateComparedPrevDay
             )
             
             Picker(selection: $selection, label: Text("期間を選択")){
@@ -57,7 +56,8 @@ struct LocalDashboard: View {
         .padding(.vertical, 25)
         .onAppear() {
             model.convertLocationName(area: locationVM.area)
-//            model.loadPatientsData()
+            print("location status: \(locationVM.statusString)")
+            print("area: \(locationVM.area ?? "")")
         }
         .onDisappear() {
             locationVM.stopUpdatingLocation()

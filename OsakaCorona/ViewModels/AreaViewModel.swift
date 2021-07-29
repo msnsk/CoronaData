@@ -15,6 +15,7 @@ class AreaViewModel: ObservableObject {
             getLatestDateOfPatientsData()
             getComulPatientsNumLastDay()
             getComulPatientsAll()
+            compareComulPatientsNumFromPrevDay()
             getComulPatientsNumInMonths()
             getComulPatientsNumInWeeks()
             getComulPatientsNumInDays()
@@ -36,6 +37,7 @@ class AreaViewModel: ObservableObject {
     
     @Published var latestDateOfPatients = "Loading..."
     @Published var comulPatientsNumLastDay: Int = 0
+    @Published var comulPatientsRateComparedPrevDay: Double = 0.00
     private var comulPatientsAll = [(String, Double)]()
     @Published var comulPatientsNumInMonths = [(String, Double)]()
     @Published var comulPatientsNumInWeeks = [(String, Double)]()
@@ -43,7 +45,7 @@ class AreaViewModel: ObservableObject {
     private var newPatientsAll = [Double]()
     @Published var newPatientsNumLastDay: Int = 0
     @Published var newPatientsNumComparedPrevDay: Int = 0
-    @Published var newPatientsRateComparedPrevDay: Double = 0.0
+    @Published var newPatientsRateComparedPrevDay: Double = 0.00
     @Published var newPatientsNumInMonths = [Double]()
     @Published var newPatientsNumInWeeks = [Double]()
     @Published var newPatientsNumInDays = [Double]()
@@ -96,12 +98,6 @@ class AreaViewModel: ObservableObject {
     }
     
     //MARK: - 累積感染者
-    // 最終日の累積感染者数を取得する
-    func getComulPatientsNumLastDay() {
-        if let patients = self.loadedData.last?.npatients {
-            comulPatientsNumLastDay = Int(patients) ?? 0
-        }
-    }
     
     // 全期間の累積感染者数を出力する
     func getComulPatientsAll() {
@@ -111,6 +107,18 @@ class AreaViewModel: ObservableObject {
             comulPatients.append((item.date, num))
         }
         comulPatientsAll = comulPatients
+    }
+    // 最終日の累積感染者数を取得する
+    func getComulPatientsNumLastDay() {
+        if let patients = loadedData.last?.npatients {
+            comulPatientsNumLastDay = Int(patients) ?? 0
+        }
+    }
+    // 最終日の累積感染者数とその前日の値を比較する
+    func compareComulPatientsNumFromPrevDay() {
+        guard let lastNum = Double(loadedData[loadedData.count - 1].npatients) else { return }
+        guard let prevNum = Double(loadedData[loadedData.count - 2].npatients) else { return }
+        comulPatientsRateComparedPrevDay = (lastNum - prevNum) / prevNum * 100
     }
     //　24ヶ月間の累積感染者数を取得する
     func getComulPatientsNumInMonths() {
@@ -202,8 +210,10 @@ class AreaViewModel: ObservableObject {
     
     // 最終日の感染者数の前日との差と比を出力
     func compareNewPatientsNumFromPrevDay() {
-        newPatientsNumComparedPrevDay = Int(newPatientsAll[newPatientsAll.count - 1] - newPatientsAll[newPatientsAll.count - 2])
-        newPatientsRateComparedPrevDay = newPatientsAll[newPatientsAll.count - 1] / newPatientsAll[newPatientsAll.count - 2] * 100
+        let lastNum = newPatientsAll[newPatientsAll.count - 1]
+        let prevNum = newPatientsAll[newPatientsAll.count - 2]
+        newPatientsNumComparedPrevDay = Int(lastNum) - Int(prevNum)
+        newPatientsRateComparedPrevDay = (lastNum - prevNum) / prevNum * 100
     }
     
     // 24ヶ月間の新規感染者数を取得する

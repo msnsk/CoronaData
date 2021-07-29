@@ -21,12 +21,14 @@ struct OtherDashboard: View {
             }
             
             HeaderView(
+                isJapanViewModel: false,
                 newPatients: model.newPatientsNumLastDay,
                 newPatientslastUpdate: model.latestDateOfPatients,
                 newPatientsComparison: model.newPatientsNumComparedPrevDay,
                 newPatientsComparisonRate: model.newPatientsRateComparedPrevDay,
                 comulPatients: model.comulPatientsNumLastDay,
-                comulPatientsLastUpdate: model.latestDateOfPatients
+                comulPatientsLastUpdate: model.latestDateOfPatients,
+                comulPatientsComparisonRate: model.comulPatientsRateComparedPrevDay
             )
             
             Picker(selection: $selection, label: Text("期間を選択")){
