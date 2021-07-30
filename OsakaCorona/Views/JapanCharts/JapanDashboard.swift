@@ -49,7 +49,7 @@ struct JapanDashboard: View {
                         isComulative: true,
                         mainNum: model.comulDeathsLastDay,
                         additionalNum: model.comulDeaths7DaysTotal,
-                        subAdditionalNum: model.comulPatients7DaysAverage
+                        subAdditionalNum: model.comulDeaths7DaysAverage
                     )
                 }
                 .padding(.horizontal)

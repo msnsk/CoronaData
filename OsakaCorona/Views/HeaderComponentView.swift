@@ -25,14 +25,14 @@ struct HeaderComponentView: View {
                 .font(.system(size: 32, weight: .bold, design: .default))
             ZStack {
                 Divider()
-                Text(isComulative ? "過去1週間" : "前日比")
+                Text(isComulative ? "過去7日間" : "前日比")
                     .padding(.horizontal)
                     .font(.caption.weight(.light))
             }
             HStack {
                 Text("\(additionalNum)")
                     .font(.title3.weight(.light))
-                Text(isComulative ? "Per Day: \(String(format: "%.0f", subAdditionalNum))" : "\(String(format: "%.2f", subAdditionalNum))%")
+                Text(isComulative ? "\(String(format: "%.0f", subAdditionalNum))/Day" : "\(String(format: "%.2f", subAdditionalNum))%")
                     .font(.caption)
                     .foregroundColor(.secondary)
                 if !isComulative {

@@ -15,7 +15,7 @@ class LocalViewModel: ObservableObject {
             getLatestDateOfPatientsData()
             getComulPatientsAll()
             getComulPatientsNumLastDay()
-            getComulPatientsRateComparedPrevDay()
+            getComulPatientsNum7Days()
             getComulPatientsNumInMonths()
             getComulPatientsNumInWeeks()
             getComulPatientsNumInDays()
@@ -38,7 +38,8 @@ class LocalViewModel: ObservableObject {
     @Published var latestDateOfPatients = "Loading..."
     private var comulPatientsAll = [(String, Double)]()
     @Published var comulPatientsNumLastDay: Int = 0
-    @Published var comulPatientsRateComparedPrevDay: Double = 0.00
+    @Published var comulPatients7DaysTotal: Int = 0
+    @Published var comulPatients7DaysAverage: Double = 0
     @Published var comulPatientsNumInMonths = [(String, Double)]()
     @Published var comulPatientsNumInWeeks = [(String, Double)]()
     @Published var comulPatientsNumInDays = [(String, Double)]()
@@ -113,11 +114,12 @@ class LocalViewModel: ObservableObject {
         }
     }
     
-    // 最終日の累積感染者数とその前日の値を比較する
-    func getComulPatientsRateComparedPrevDay() {
-        guard let lastNum = Double(loadedData[loadedData.count - 1].npatients) else { return }
-        guard let prevNum = Double(loadedData[loadedData.count - 2].npatients) else { return }
-        comulPatientsRateComparedPrevDay = (lastNum - prevNum) / prevNum * 100
+    // 過去7日間の累積感染者数と1日あたりの平均値を取得する
+    func getComulPatientsNum7Days() {
+        guard let total = Int(loadedData[loadedData.count - 1].npatients) else { return }
+        guard let totalIn7Days = Int(loadedData[loadedData.count - 8].npatients) else { return }
+        comulPatients7DaysTotal = total - totalIn7Days
+        comulPatients7DaysAverage = Double(comulPatients7DaysTotal) / 7
     }
     
     //　24ヶ月間の累積感染者数を取得する

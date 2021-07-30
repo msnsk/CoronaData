@@ -31,7 +31,7 @@ class JapanViewModel: ObservableObject {
     // 累積感染者のproperties
     @Published var comulPatientsNumsLastDay: Int = 0
     @Published var comulPatients7DaysTotal: Int = 0
-    @Published var comulPatients7DaysAverage: Double = 0.00
+    @Published var comulPatients7DaysAverage: Double = 0
     @Published var comulPatientsNumsInMonths = [(String, Double)]()
     @Published var comulPatientsNumsInWeeks = [(String, Double)]()
     @Published var comulPatientsNumsInDays = [(String, Double)]()
@@ -85,7 +85,7 @@ class JapanViewModel: ObservableObject {
     // 累積死亡者数のproperties
     @Published var comulDeathsLastDay: Int = 0
     @Published var comulDeaths7DaysTotal: Int = 0
-    @Published var comulDeaths7DaysAverage: Double = 0.00
+    @Published var comulDeaths7DaysAverage: Double = 0
     @Published var comulDeathsInMonths = [(String, Double)]()
     @Published var comulDeathsInWeeks = [(String, Double)]()
     @Published var comulDeathsInDays = [(String, Double)]()
