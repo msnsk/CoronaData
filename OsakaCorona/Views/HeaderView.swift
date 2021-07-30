@@ -30,6 +30,7 @@ struct HeaderView: View {
     
     var body: some View {
         HStack(spacing: 10){
+            HeaderComponentView(lastUpdate: newPatientslastUpdate, title: "新規感染者", isComulative: false, mainNum: newPatients, additionalNum: newPatientsComparison, subAdditionalNum: newPatientsComparisonRate)
             VStack(spacing: 3) {
                 Text(newPatientslastUpdate)
                     .font(.caption)

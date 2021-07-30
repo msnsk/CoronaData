@@ -18,24 +18,42 @@ struct JapanDashboard: View {
                 .font(.title)
             
             ScrollView(.horizontal) {
-                HeaderView(
-                    isJapanViewModel: true,
-                    newPatients: model.newPatientsNumLastDay,
-                    newPatientslastUpdate: model.latestDateOfPatientsData,
-                    newPatientsComparison: model.newPatientsNumComparedPrevDay,
-                    newPatientsComparisonRate: model.newPatientsRateComparedPrevDay,
-                    comulPatients: model.comulPatientsNumsLastDay,
-                    comulPatientsLastUpdate: model.latestDateOfPatientsData,
-                    comulPatientsComparisonRate: model.comulPatientsRateComparedPrevDay,
-                    
-                    newDeaths: model.newDeathsLastDay,
-                    newDeathsLastUpdate: model.latestDateOfDeathsData,
-                    newDeathsComparison: model.newDeathsComparedPrevDay,
-                    newDeathsComparisonRate: model.newDeathsRateComparedPrevDay,
-                    comulDeaths: model.comulDeathsLastDay,
-                    comulDeathsLastUpdate: model.latestDateOfDeathsData,
-                    comulDeathsComparisonRate: model.comulDeathsRateComparedPrevDay
-                )
+                HStack(spacing: 10){
+                    HeaderComponentView(
+                        lastUpdate: model.latestDateOfPatientsData,
+                        title: "新規感染者",
+                        isComulative: false,
+                        mainNum: model.newPatientsNumLastDay,
+                        additionalNum: model.newPatientsNumComparedPrevDay,
+                        subAdditionalNum: model.newPatientsRateComparedPrevDay
+                    )
+                    HeaderComponentView(
+                        lastUpdate: model.latestDateOfPatientsData,
+                        title: "累積感染者",
+                        isComulative: true,
+                        mainNum: model.comulPatientsNumsLastDay,
+                        additionalNum: model.comulPatients7DaysTotal,
+                        subAdditionalNum: model.comulPatients7DaysAverage
+                    )
+                    HeaderComponentView(
+                        lastUpdate: model.latestDateOfDeathsData,
+                        title: "新規死亡者",
+                        isComulative: false,
+                        mainNum: model.newDeathsLastDay,
+                        additionalNum: model.newDeathsComparedPrevDay,
+                        subAdditionalNum: model.newDeathsRateComparedPrevDay
+                    )
+                    HeaderComponentView(
+                        lastUpdate: model.latestDateOfDeathsData,
+                        title: "累積死亡者",
+                        isComulative: true,
+                        mainNum: model.comulDeathsLastDay,
+                        additionalNum: model.comulDeaths7DaysTotal,
+                        subAdditionalNum: model.comulPatients7DaysAverage
+                    )
+                }
+                .padding(.horizontal)
+                .padding(.vertical, 25)
             }
             
             Picker(selection: $selection, label: Text("期間を選択")){

@@ -15,7 +15,7 @@ class JapanViewModel: ObservableObject {
             getLatestDateOfJapanPatients()
             // 累積感染者のfunctions
             getComulPatientsNumLastDay()
-            compareComulPatientsNumFromPrevDay()
+            getComulPatientsNum7Days()
             getComulPatientsNumInMonths()
             getComulPatientsNumInWeeks()
             getComulPatientsNumInDays()
@@ -30,7 +30,8 @@ class JapanViewModel: ObservableObject {
     @Published var latestDateOfPatientsData = "...Loading"
     // 累積感染者のproperties
     @Published var comulPatientsNumsLastDay: Int = 0
-    @Published var comulPatientsRateComparedPrevDay: Double = 0.00
+    @Published var comulPatients7DaysTotal: Int = 0
+    @Published var comulPatients7DaysAverage: Double = 0.00
     @Published var comulPatientsNumsInMonths = [(String, Double)]()
     @Published var comulPatientsNumsInWeeks = [(String, Double)]()
     @Published var comulPatientsNumsInDays = [(String, Double)]()
@@ -67,7 +68,7 @@ class JapanViewModel: ObservableObject {
             getLatestDateOfDeathsData()
             // 累積死亡者数のfunctions
             getComulDeathsLastDay()
-            compareComulDeathsFromPrevDay()
+            getComulDeaths7Days()
             getComulDeathsInMonths()
             getComulDeathsInWeeks()
             getComulDeathsInDays()
@@ -83,7 +84,8 @@ class JapanViewModel: ObservableObject {
     @Published var latestDateOfDeathsData = "...Loading"
     // 累積死亡者数のproperties
     @Published var comulDeathsLastDay: Int = 0
-    @Published var comulDeathsRateComparedPrevDay: Double = 0
+    @Published var comulDeaths7DaysTotal: Int = 0
+    @Published var comulDeaths7DaysAverage: Double = 0.00
     @Published var comulDeathsInMonths = [(String, Double)]()
     @Published var comulDeathsInWeeks = [(String, Double)]()
     @Published var comulDeathsInDays = [(String, Double)]()
@@ -151,11 +153,13 @@ class JapanViewModel: ObservableObject {
         }
     }
     
-    func compareComulPatientsNumFromPrevDay() {
-        let lastNum = Double(japanPatientsData[japanPatientsData.count - 1].npatients)
-        let prevNum = Double(japanPatientsData[japanPatientsData.count - 2].npatients)
-        comulPatientsRateComparedPrevDay = (lastNum - prevNum) / prevNum * 100
+    func getComulPatientsNum7Days() {
+        let total = japanPatientsData[japanPatientsData.count - 1].npatients
+        let total7DaysAgo = japanPatientsData[japanPatientsData.count - 8].npatients
+        comulPatients7DaysTotal = total - total7DaysAgo
+        comulPatients7DaysAverage = Double(comulPatients7DaysTotal) / 7
     }
+    
     // 12ヶ月間の累積感染者数を取得する
     func getComulPatientsNumInMonths() {
         let comulativePatients = japanPatientsData
@@ -429,10 +433,11 @@ class JapanViewModel: ObservableObject {
         }
     }
     // 最終更新日の累積死亡者数とその前日比の値を比較する
-    func compareComulDeathsFromPrevDay() {
-        let lastNum = Double(deathsData[deathsData.count - 1].ndeaths)
-        let prevNum = Double(deathsData[deathsData.count - 2].ndeaths)
-        comulDeathsRateComparedPrevDay = (lastNum - prevNum) / prevNum * 100
+    func getComulDeaths7Days() {
+        let deathsAll = deathsData[deathsData.count - 1].ndeaths
+        let deaths7days = deathsData[deathsData.count - 8].ndeaths
+        comulDeaths7DaysTotal = deathsAll - deaths7days
+        comulDeaths7DaysAverage = Double(comulDeaths7DaysTotal) / 7
     }
     // 24ヶ月間の累積死亡者数を取得する
     func getComulDeathsInMonths() {

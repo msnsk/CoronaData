@@ -9,7 +9,6 @@ import Foundation
 import Combine
 
 class LocalViewModel: ObservableObject {
-    
     //MARK: - Properties
     @Published var loadedData = [ItemData]() {
         didSet {
@@ -44,7 +43,6 @@ class LocalViewModel: ObservableObject {
     @Published var comulPatientsNumInMonths = [(String, Double)]()
     @Published var comulPatientsNumInWeeks = [(String, Double)]()
     @Published var comulPatientsNumInDays = [(String, Double)]()
-    
     private var newPatientsAll = [Double]()
     @Published var newPatientsNumLastDay: Int = 0
     @Published var newPatientsNumComparedPrevDay: Int = 0
@@ -98,7 +96,7 @@ class LocalViewModel: ObservableObject {
         }
     }
     
-    //MARK: - Comulative Patients
+    //MARK: - 累積感染者
     // 全期間の累積感染者数を出力する
     func getComulPatientsAll() {
         var comulativePatients = [(String, Double)]()
@@ -191,7 +189,6 @@ class LocalViewModel: ObservableObject {
     
     // 全期間の新規患者数を出力する
     func getNewPatientsAll() {
-        // 累積陽性患者数の配列を作成
         var comulativePatinets = [Double]()
         for item in loadedData {
             guard let num = Double(item.npatients) else { continue }

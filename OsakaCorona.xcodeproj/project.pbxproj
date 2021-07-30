@@ -31,6 +31,7 @@
 		1797A60C26A5282200680A03 /* LocalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1797A60B26A5282200680A03 /* LocalViewModel.swift */; };
 		1797A60E26A5282E00680A03 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1797A60D26A5282E00680A03 /* DataModel.swift */; };
 		1797A61026A5287F00680A03 /* LocalDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1797A60F26A5287F00680A03 /* LocalDashboard.swift */; };
+		17D4647926B2F3630091884C /* HeaderComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D4647826B2F3630091884C /* HeaderComponentView.swift */; };
 		17EC20F026AE493900CF825A /* AreaNameDict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EC20EF26AE493900CF825A /* AreaNameDict.swift */; };
 		17EC20F226AE9F7100CF825A /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EC20F126AE9F7100CF825A /* LocationViewModel.swift */; };
 		17F9DFD026A8883000D8270C /* LocalWeeklySummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F9DFCF26A8883000D8270C /* LocalWeeklySummaryView.swift */; };
@@ -84,6 +85,7 @@
 		1797A60B26A5282200680A03 /* LocalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalViewModel.swift; sourceTree = "<group>"; };
 		1797A60D26A5282E00680A03 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		1797A60F26A5287F00680A03 /* LocalDashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDashboard.swift; sourceTree = "<group>"; };
+		17D4647826B2F3630091884C /* HeaderComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderComponentView.swift; sourceTree = "<group>"; };
 		17EC20EF26AE493900CF825A /* AreaNameDict.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaNameDict.swift; sourceTree = "<group>"; };
 		17EC20F126AE9F7100CF825A /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 		17F9DFCF26A8883000D8270C /* LocalWeeklySummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalWeeklySummaryView.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 			children = (
 				1797A5DF26A5279100680A03 /* ContentView.swift */,
 				170A6C3726AAE97900C7D53E /* HeaderView.swift */,
+				17D4647826B2F3630091884C /* HeaderComponentView.swift */,
 				1720FE1826ABE61300C8C947 /* AreaPickerView.swift */,
 				170A6C3426AAA0D800C7D53E /* JapanCharts */,
 				170A6C3326AAA0A600C7D53E /* LocalCharts */,
@@ -391,6 +394,7 @@
 				17F9DFD226A888C800D8270C /* LocalDailySummaryView.swift in Sources */,
 				170A6C3626AAA91600C7D53E /* JapanDaylySummaryView.swift in Sources */,
 				1797A60C26A5282200680A03 /* LocalViewModel.swift in Sources */,
+				17D4647926B2F3630091884C /* HeaderComponentView.swift in Sources */,
 				170A6C3226AAA04600C7D53E /* JapanWeeklySummaryView.swift in Sources */,
 				17726BE826B008A70079E7F7 /* AreaViewModel.swift in Sources */,
 				17518DE726AA646800C9465F /* JapanDashboard.swift in Sources */,

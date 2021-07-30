@@ -36,9 +36,9 @@ class AreaViewModel: ObservableObject {
     }
     
     @Published var latestDateOfPatients = "Loading..."
+    private var comulPatientsAll = [(String, Double)]()
     @Published var comulPatientsNumLastDay: Int = 0
     @Published var comulPatientsRateComparedPrevDay: Double = 0.00
-    private var comulPatientsAll = [(String, Double)]()
     @Published var comulPatientsNumInMonths = [(String, Double)]()
     @Published var comulPatientsNumInWeeks = [(String, Double)]()
     @Published var comulPatientsNumInDays = [(String, Double)]()
