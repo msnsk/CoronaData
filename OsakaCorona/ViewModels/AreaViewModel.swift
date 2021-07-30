@@ -10,6 +10,7 @@ import Combine
 
 class AreaViewModel: ObservableObject {
     //MARK: - Properties
+    @Published var isCurrentArea = true
     @Published var loadedData = [ItemData]() {
         didSet {
             getLatestDateOfPatientsData()
@@ -28,12 +29,19 @@ class AreaViewModel: ObservableObject {
         }
     }
     
-    @Published var location: String {
+    @Published var selectedLocation: String {
         didSet {
-            UserDefaults.standard.set(location, forKey:"selectedLocation")
+            UserDefaults.standard.set(selectedLocation, forKey:"selectedLocation")
             loadPatientsData()
         }
     }
+    @Published var currentLocation: String {
+        didSet {
+            UserDefaults.standard.set(currentLocation, forKey:"currentLocation")
+            loadPatientsData()
+        }
+    }
+    
     
     @Published var latestDateOfPatients = "Loading..."
     private var comulPatientsAll = [(String, Double)]()
@@ -52,23 +60,33 @@ class AreaViewModel: ObservableObject {
     
     //MARK: - Initialize
     init() {
-        location = UserDefaults.standard.string(forKey: "selectedLocation") ?? "北海道"
+        currentLocation = UserDefaults.standard.string(forKey: "currentLocation") ?? ""
+        selectedLocation = UserDefaults.standard.string(forKey: "selectedLocation") ?? "北海道"
         loadPatientsData()
     }
     
     //MARK: - Functions
     func convertLocationName(area: String?) {
         if let areaName = area {
-            location = areaNameDict[areaName] ?? ""
+            currentLocation = areaNameDict[areaName] ?? ""
         }
     }
     
     //MARK: - 感染者数のJSONデータをデコードして取得
     func loadPatientsData() {
-        guard let encodedLocation = self.location.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+        guard let encodedCorrentLocation = self.currentLocation.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
             return
         }
-        let completeURL = "https://opendata.corona.go.jp/api/Covid19JapanAll" + "?dataName=" + encodedLocation
+        guard let encodedSelectedLocation = self.selectedLocation.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            return
+        }
+        print("encodedSelectedLocation: \(encodedSelectedLocation)")
+        var completeURL = ""
+        if isCurrentArea {
+            completeURL = "https://opendata.corona.go.jp/api/Covid19JapanAll" + "?dataName=" + encodedCorrentLocation
+        } else {
+            completeURL = "https://opendata.corona.go.jp/api/Covid19JapanAll" + "?dataName=" + encodedSelectedLocation
+        }
         //print("completeURL: \(completeURL)")
         guard let url = URL(string: completeURL) else {
             print("Local Patients - Invalid URL")

@@ -32,7 +32,7 @@ struct HeaderComponentView: View {
             HStack {
                 Text("\(additionalNum)")
                     .font(.title3.weight(.light))
-                Text(isComulative ? "Per Day: \(String(format: "%.0f", subAdditionalNum))" : "\(String(format: "%.2f", subAdditionalNum))%")
+                Text(isComulative ? "1日平均 \(String(format: "%.0f", subAdditionalNum))" : "\(String(format: "%.2f", subAdditionalNum))%")
                     .font(.caption)
                     .foregroundColor(.secondary)
                 if !isComulative {

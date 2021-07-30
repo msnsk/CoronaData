@@ -20,16 +20,26 @@ struct OtherDashboard: View {
                     .font(.title)
             }
             
-            HeaderView(
-                isJapanViewModel: false,
-                newPatients: model.newPatientsNumLastDay,
-                newPatientslastUpdate: model.latestDateOfPatients,
-                newPatientsComparison: model.newPatientsNumComparedPrevDay,
-                newPatientsComparisonRate: model.newPatientsRateComparedPrevDay,
-                comulPatients: model.comulPatientsNumLastDay,
-                comulPatientsLastUpdate: model.latestDateOfPatients,
-                comulPatientsComparisonRate: model.comulPatientsRateComparedPrevDay
-            )
+            HStack(spacing: 10){
+                HeaderComponentView(
+                    lastUpdate: model.latestDateOfPatients,
+                    title: "新規感染者",
+                    isComulative: false,
+                    mainNum: model.newPatientsNumLastDay,
+                    additionalNum: model.newPatientsNumComparedPrevDay,
+                    subAdditionalNum: model.newPatientsRateComparedPrevDay
+                )
+                HeaderComponentView(
+                    lastUpdate: model.latestDateOfPatients,
+                    title: "累積感染者",
+                    isComulative: true,
+                    mainNum: model.comulPatientsNumLastDay,
+                    additionalNum: model.comulPatientsNumLastDay,
+                    subAdditionalNum: model.comulPatientsRateComparedPrevDay
+                )
+            }
+            .padding(.horizontal)
+            .padding(.vertical, 25)
             
             Picker(selection: $selection, label: Text("期間を選択")){
                 ForEach(0..<pigments.count) { index in
@@ -55,6 +65,9 @@ struct OtherDashboard: View {
             Spacer()
         }
         .padding(.vertical, 25)
+        .onAppear() {
+            model.isCurrentArea = false
+        }
     }
 }
 

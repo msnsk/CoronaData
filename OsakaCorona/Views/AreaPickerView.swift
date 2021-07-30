@@ -59,7 +59,7 @@ struct AreaPickerView: View {
         "沖縄県",
     ]
     var body: some View {
-        Picker(selection: self.$model.location, label: Text("\(model.location)").font(.title), content: {
+        Picker(selection: self.$model.selectedLocation, label: Text("\(model.selectedLocation)").font(.title), content: {
             ForEach(0..<self.locationList.count) { index in
                 Text(self.locationList[index]).tag(self.locationList[index])
             }

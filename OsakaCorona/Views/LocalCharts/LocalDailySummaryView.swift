@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftUICharts
 
 struct LocalDailySummaryView: View {
-    @EnvironmentObject var model: LocalViewModel
+    @EnvironmentObject var model: AreaViewModel
     
     var body: some View {
         ScrollView {
