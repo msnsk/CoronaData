@@ -15,12 +15,12 @@ struct JapanWeeklySummaryView: View {
         ScrollView {
             LazyVStack(spacing: 30) {
                 LineChartView(
-                    data: self.model.newPatientsNumsInWeeks,
+                    data: model.newPatientsNumsInWeeks,
                     title: "新規陽性者数",
                     legend: "過去12週間",
                     //style: <#T##ChartStyle#>,
                     form: ChartForm.large,
-                    //rateValue: <#T##Int?#>,
+                    rateValue: Int(model.newPatientsRateComparedPrevDay),
                     //dropShadow: <#T##Bool?#>,
                     valueSpecifier: "%.0f"
                 )
@@ -30,9 +30,8 @@ struct JapanWeeklySummaryView: View {
                     legend: "過去12週間",
                     //style: <#T##ChartStyle#>,
                     form: ChartForm.extraLarge,
-                    cornerImage: Image(systemName: "chart.bar.fill"),
                     //dropShadow: <#T##Bool?#>
-                    //cornerImage: Image(systemName: "chart.bar.fill"),
+                    cornerImage: nil,
                     valueSpecifier: "%.0f",
                     animatedToBack: true
                 )
@@ -42,7 +41,7 @@ struct JapanWeeklySummaryView: View {
                     legend: "過去12週間",
                     //style: <#T##ChartStyle#>,
                     form: ChartForm.large,
-                    //rateValue: <#T##Int?#>,
+                    rateValue: Int(model.newDeathsRateComparedPrevDay),
                     //dropShadow: <#T##Bool?#>,
                     valueSpecifier: "%.0f"
                 )
@@ -52,9 +51,8 @@ struct JapanWeeklySummaryView: View {
                     legend: "過去12週間",
                     //style: <#T##ChartStyle#>,
                     form: ChartForm.extraLarge,
-                    cornerImage: Image(systemName: "chart.bar.fill"),
                     //dropShadow: <#T##Bool?#>
-                    //cornerImage: Image(systemName: "chart.bar.fill"),
+                    cornerImage: nil,
                     valueSpecifier: "%.0f",
                     animatedToBack: true
                 )
@@ -64,7 +62,7 @@ struct JapanWeeklySummaryView: View {
                     legend: "過去12週間",
                     //style: <#T##ChartStyle#>,
                     form: ChartForm.large,
-                    //rateValue: <#T##Int?#>,
+                    rateValue: Int(model.needInpatientRateComparedPrevDay),
                     //dropShadow: <#T##Bool?#>,
                     valueSpecifier: "%.0f"
                 )
@@ -75,7 +73,9 @@ struct JapanWeeklySummaryView: View {
                     //style: <#T##ChartStyle#>,
                     form: ChartForm.extraLarge,
                     //dropShadow: <#T##Bool?#>,
-                    valueSpecifier: "%.0f"
+                    cornerImage: nil,
+                    valueSpecifier: "%.0f",
+                    animatedToBack: true
                 )
             }
             .padding()

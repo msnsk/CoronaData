@@ -15,12 +15,12 @@ struct JapanDaylySummaryView: View {
         ScrollView {
             LazyVStack(spacing: 30) {
                 LineChartView(
-                    data: self.model.newPatientsNumsInDays,
+                    data: model.newPatientsNumsInDays,
                     title: "新規陽性者数",
                     legend: "過去7日間",
                     //style: <#T##ChartStyle#>,
                     form: ChartForm.large,
-                    //rateValue: <#T##Int?#>,
+                    rateValue: Int(model.newPatientsRateComparedPrevDay),
                     //dropShadow: <#T##Bool?#>,
                     valueSpecifier: "%.0f"
                 )
@@ -31,17 +31,17 @@ struct JapanDaylySummaryView: View {
                     //style: <#T##ChartStyle#>,
                     form: ChartForm.extraLarge,
                     //dropShadow: <#T##Bool?#>
-                    cornerImage: Image(systemName: "chart.bar.fill"),
+                    cornerImage: nil,
                     valueSpecifier: "%.0f",
                     animatedToBack: true
                 )
                 LineChartView(
-                    data: self.model.newDeathsInDays,
+                    data: model.newDeathsInDays,
                     title: "新規死亡者数",
                     legend: "過去7日間",
                     //style: <#T##ChartStyle#>,
                     form: ChartForm.large,
-                    //rateValue: <#T##Int?#>,
+                    rateValue: Int(model.newDeathsRateComparedPrevDay),
                     //dropShadow: <#T##Bool?#>,
                     valueSpecifier: "%.0f"
                 )
@@ -52,17 +52,17 @@ struct JapanDaylySummaryView: View {
                     //style: <#T##ChartStyle#>,
                     form: ChartForm.extraLarge,
                     //dropShadow: <#T##Bool?#>
-                    cornerImage: Image(systemName: "chart.bar.fill"),
+                    cornerImage: nil,
                     valueSpecifier: "%.0f",
                     animatedToBack: true
                 )
                 LineChartView(
-                    data: self.model.needInpatientNumsInDays,
+                    data: model.needInpatientNumsInDays,
                     title: "入院治療等を要する者",
                     legend: "過去7日間",
                     //style: <#T##ChartStyle#>,
                     form: ChartForm.large,
-                    //rateValue: <#T##Int?#>,
+                    rateValue: Int(model.needInpatientRateComparedPrevDay),
                     //dropShadow: <#T##Bool?#>,
                     valueSpecifier: "%.0f"
                 )
@@ -73,7 +73,9 @@ struct JapanDaylySummaryView: View {
                     //style: <#T##ChartStyle#>,
                     form: ChartForm.extraLarge,
                     //dropShadow: <#T##Bool?#>,
-                    valueSpecifier: "%.0f"
+                    cornerImage: nil,
+                    valueSpecifier: "%.0f",
+                    animatedToBack: true
                 )
             }
             .padding()
