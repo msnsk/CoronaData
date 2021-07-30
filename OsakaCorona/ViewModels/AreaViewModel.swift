@@ -13,15 +13,15 @@ class AreaViewModel: ObservableObject {
     @Published var loadedData = [ItemData]() {
         didSet {
             getLatestDateOfPatientsData()
-            getComulPatientsNumLastDay()
             getComulPatientsAll()
-            compareComulPatientsNumFromPrevDay()
+            getComulPatientsNumLastDay()
+            getComulPatientsRateComparedPrevDay()
             getComulPatientsNumInMonths()
             getComulPatientsNumInWeeks()
             getComulPatientsNumInDays()
             getNewPatientsAll()
             getNewPatientsNumLastDay()
-            compareNewPatientsNumFromPrevDay()
+            getNewPatientsNumComparedPrevDay()
             getNewPatientsNumInMonths()
             getNewPatientsNumInWeeks()
             getNewPatientsNumInDays()
@@ -115,7 +115,7 @@ class AreaViewModel: ObservableObject {
         }
     }
     // 最終日の累積感染者数とその前日の値を比較する
-    func compareComulPatientsNumFromPrevDay() {
+    func getComulPatientsRateComparedPrevDay() {
         guard let lastNum = Double(loadedData[loadedData.count - 1].npatients) else { return }
         guard let prevNum = Double(loadedData[loadedData.count - 2].npatients) else { return }
         comulPatientsRateComparedPrevDay = (lastNum - prevNum) / prevNum * 100
@@ -209,7 +209,7 @@ class AreaViewModel: ObservableObject {
     }
     
     // 最終日の感染者数の前日との差と比を出力
-    func compareNewPatientsNumFromPrevDay() {
+    func getNewPatientsNumComparedPrevDay() {
         let lastNum = newPatientsAll[newPatientsAll.count - 1]
         let prevNum = newPatientsAll[newPatientsAll.count - 2]
         newPatientsNumComparedPrevDay = Int(lastNum) - Int(prevNum)

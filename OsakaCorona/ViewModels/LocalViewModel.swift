@@ -19,10 +19,9 @@ class LocalViewModel: ObservableObject {
             getComulPatientsNumInMonths()
             getComulPatientsNumInWeeks()
             getComulPatientsNumInDays()
-            
             getNewPatientsAll()
             getNewPatientsNumLastDay()
-            compareNewPatientsNumFromPrevDay()
+            getNewPatientsNumComparedPrevDay()
             getNewPatientsNumInMonths()
             getNewPatientsNumInWeeks()
             getNewPatientsNumInDays()
@@ -186,7 +185,6 @@ class LocalViewModel: ObservableObject {
     }
     
     //MARK: - 新規感染者
-    
     // 全期間の新規患者数を出力する
     func getNewPatientsAll() {
         var comulativePatinets = [Double]()
@@ -211,7 +209,7 @@ class LocalViewModel: ObservableObject {
     }
     
     // 最終日の感染者数の前日との差と比を出力
-    func compareNewPatientsNumFromPrevDay() {
+    func getNewPatientsNumComparedPrevDay() {
         let lastNum = newPatientsAll[newPatientsAll.count - 1]
         let prevNum = newPatientsAll[newPatientsAll.count - 2]
         newPatientsNumComparedPrevDay = Int(lastNum) - Int(prevNum)

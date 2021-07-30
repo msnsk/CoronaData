@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SwiftUICharts
 
 struct LocalDashboard: View {
     @EnvironmentObject var model: LocalViewModel
