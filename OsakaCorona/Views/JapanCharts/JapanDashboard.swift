@@ -24,7 +24,7 @@ struct JapanDashboard: View {
                 .font(.footnote.weight(.light))
             
             ScrollView(.horizontal) {
-                HStack(spacing: 10){
+                HStack(spacing: 16){
                     HeaderComponentView(
                         lastUpdate: model.latestDateOfPatientsData,
                         title: "新規感染者",
@@ -58,8 +58,7 @@ struct JapanDashboard: View {
                         subAdditionalNum: model.comulDeaths7DaysAverage
                     )
                 }
-                .padding(.horizontal)
-                .padding(.vertical, 25)
+                .padding()
             }
             
             Picker(selection: $selection, label: Text("期間を選択")){
@@ -69,7 +68,7 @@ struct JapanDashboard: View {
             }
             .pickerStyle(SegmentedPickerStyle())
             .padding(.horizontal, 40)
-            .padding(.bottom, 16)
+            .padding(.vertical, 12)
             
             if model.latestDateOfPatientsData != "Loading..." {
                 switch selection {

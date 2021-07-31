@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		170A6C3226AAA04600C7D53E /* JapanWeeklySummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170A6C3126AAA04600C7D53E /* JapanWeeklySummaryView.swift */; };
 		170A6C3626AAA91600C7D53E /* JapanDaylySummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170A6C3526AAA91600C7D53E /* JapanDaylySummaryView.swift */; };
-		170A6C3826AAE97900C7D53E /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170A6C3726AAE97900C7D53E /* HeaderView.swift */; };
 		1717592526AD1E9E0014146E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1717592426AD1E9E0014146E /* CoreLocation.framework */; };
 		1720FE1926ABE61300C8C947 /* AreaPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1720FE1826ABE61300C8C947 /* AreaPickerView.swift */; };
 		17518DE426A9CA6100C9465F /* JapanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17518DE326A9CA6100C9465F /* JapanViewModel.swift */; };
@@ -58,7 +57,6 @@
 /* Begin PBXFileReference section */
 		170A6C3126AAA04600C7D53E /* JapanWeeklySummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapanWeeklySummaryView.swift; sourceTree = "<group>"; };
 		170A6C3526AAA91600C7D53E /* JapanDaylySummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapanDaylySummaryView.swift; sourceTree = "<group>"; };
-		170A6C3726AAE97900C7D53E /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		1717592426AD1E9E0014146E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		1720FE1826ABE61300C8C947 /* AreaPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaPickerView.swift; sourceTree = "<group>"; };
 		17518DE326A9CA6100C9465F /* JapanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapanViewModel.swift; sourceTree = "<group>"; };
@@ -153,7 +151,6 @@
 			isa = PBXGroup;
 			children = (
 				1797A5DF26A5279100680A03 /* ContentView.swift */,
-				170A6C3726AAE97900C7D53E /* HeaderView.swift */,
 				17D4647826B2F3630091884C /* HeaderComponentView.swift */,
 				1720FE1826ABE61300C8C947 /* AreaPickerView.swift */,
 				170A6C3426AAA0D800C7D53E /* JapanCharts */,
@@ -412,7 +409,6 @@
 				1797A5DE26A5279100680A03 /* OsakaCoronaApp.swift in Sources */,
 				17726BDF26B007C20079E7F7 /* OtherDashboard.swift in Sources */,
 				17EC20F226AE9F7100CF825A /* LocationViewModel.swift in Sources */,
-				170A6C3826AAE97900C7D53E /* HeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

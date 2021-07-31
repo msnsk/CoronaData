@@ -29,11 +29,6 @@ struct ContentView: View {
                         Image(systemName: "square.grid.3x3.topleft.fill")
                         Text("Selected Area")
                     }
-                AreaPickerView()
-                    .tabItem {
-                        Image(systemName: "gearshape")
-                        Text("設定")
-                    }
             }
         }
     }

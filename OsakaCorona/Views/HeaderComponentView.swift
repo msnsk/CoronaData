@@ -42,11 +42,12 @@ struct HeaderComponentView: View {
                 }
             }
         }
-        .padding()
+        .padding(.horizontal, 16)
+        .padding(.vertical, 10)
         .background(
             RoundedRectangle(cornerRadius: 25.0)
                 .foregroundColor(Color(.systemBackground))
-                .shadow(radius: 5)
+                .shadow(color: Color(.systemGray).opacity(0.5), radius: 5)
         )
         .fixedSize(horizontal: true, vertical: false)
     }

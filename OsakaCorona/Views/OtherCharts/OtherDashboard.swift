@@ -22,7 +22,7 @@ struct OtherDashboard: View {
             Text("Impact of COVID-19 in Selected Region")
                 .font(.footnote.weight(.light))
             
-            HStack(spacing: 10){
+            HStack(spacing: 16){
                 HeaderComponentView(
                     lastUpdate: model.latestDateOfPatients,
                     title: "新規感染者",
@@ -40,8 +40,7 @@ struct OtherDashboard: View {
                     subAdditionalNum: model.comulPatients7DaysAverage
                 )
             }
-            .padding(.horizontal)
-            .padding(.vertical, 25)
+            .padding()
             
             Picker(selection: $selection, label: Text("期間を選択")){
                 ForEach(0..<pigments.count) { index in
@@ -50,7 +49,7 @@ struct OtherDashboard: View {
             }
             .pickerStyle(SegmentedPickerStyle())
             .padding(.horizontal, 40)
-            .padding(.bottom, 16)
+            .padding(.bottom, 12)
             
             if model.latestDateOfPatients != "Loading..." {
                 switch selection {
