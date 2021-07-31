@@ -20,7 +20,7 @@ struct JapanDaylySummaryView: View {
                     legend: "過去7日間",
                     //style: <#T##ChartStyle#>,
                     form: ChartForm.large,
-                    rateValue: Int(model.newPatientsRateComparedPrevDay),
+                    rateValue: model.newPatientsPrevRateInDays,
                     //dropShadow: <#T##Bool?#>,
                     valueSpecifier: "%.0f"
                 )
@@ -41,7 +41,7 @@ struct JapanDaylySummaryView: View {
                     legend: "過去7日間",
                     //style: <#T##ChartStyle#>,
                     form: ChartForm.large,
-                    rateValue: Int(model.newDeathsRateComparedPrevDay),
+                    rateValue: model.newDeathsPrevRateInDays,
                     //dropShadow: <#T##Bool?#>,
                     valueSpecifier: "%.0f"
                 )
@@ -62,7 +62,7 @@ struct JapanDaylySummaryView: View {
                     legend: "過去7日間",
                     //style: <#T##ChartStyle#>,
                     form: ChartForm.large,
-                    rateValue: Int(model.needInpatientRateComparedPrevDay),
+                    rateValue: model.needInpatientPrevRateInDays,
                     //dropShadow: <#T##Bool?#>,
                     valueSpecifier: "%.0f"
                 )

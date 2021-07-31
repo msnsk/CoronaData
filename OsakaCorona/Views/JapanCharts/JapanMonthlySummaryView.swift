@@ -21,7 +21,7 @@ struct JapanMonthlySummaryView: View {
                     legend: "過去24ヶ月間",
                     //style: <#T##ChartStyle#>,
                     form: ChartForm.large,
-                    rateValue: Int(model.newPatientsRateComparedPrevDay),
+                    rateValue: model.newPatientsPrevRateInMonths,
                     //dropShadow: <#T##Bool?#>,
                     valueSpecifier: "%.0f"
                 )
@@ -42,7 +42,7 @@ struct JapanMonthlySummaryView: View {
                     legend: "過去24ヶ月間",
                     //style: <#T##ChartStyle#>,
                     form: ChartForm.large,
-                    rateValue: Int(model.newDeathsRateComparedPrevDay),
+                    rateValue: model.newDeathsPrevRateInMonths,
                     //dropShadow: <#T##Bool?#>,
                     valueSpecifier: "%.0f"
                 )
@@ -58,12 +58,12 @@ struct JapanMonthlySummaryView: View {
                     animatedToBack: true
                 )
                 LineChartView(
-                    data: self.model.needInpatientNumsInMonths,
+                    data: model.needInpatientNumsInMonths,
                     title: "入院治療等を要する者",
                     legend: "過去24ヶ月間",
                     //style: <#T##ChartStyle#>,
                     form: ChartForm.large,
-                    rateValue: Int(model.needInpatientRateComparedPrevDay),
+                    rateValue: model.needInpatientPrevRateInMonths,
                     //dropShadow: <#T##Bool?#>,
                     valueSpecifier: "%.0f"
                 )

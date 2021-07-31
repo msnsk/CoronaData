@@ -15,8 +15,14 @@ struct LocalDashboard: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            Text("\(model.location)のコロナ関連データ")
-                .font(.title)
+            HStack(alignment: .bottom, spacing: 0) {
+                Text(model.location)
+                    .font(.title)
+                Text("のコロナウイルスの影響")
+                    .font(.title2)
+            }
+            Text("Impact of COVID-19 in Your Region")
+                .font(.footnote.weight(.light))
             
             HStack(spacing: 10){
                 HeaderComponentView(

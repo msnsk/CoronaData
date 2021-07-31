@@ -20,7 +20,7 @@ struct JapanWeeklySummaryView: View {
                     legend: "過去12週間",
                     //style: <#T##ChartStyle#>,
                     form: ChartForm.large,
-                    rateValue: Int(model.newPatientsRateComparedPrevDay),
+                    rateValue: model.newPatientsPrevRateInWeeks,
                     //dropShadow: <#T##Bool?#>,
                     valueSpecifier: "%.0f"
                 )
@@ -36,12 +36,12 @@ struct JapanWeeklySummaryView: View {
                     animatedToBack: true
                 )
                 LineChartView(
-                    data: self.model.newDeathsInWeeks,
+                    data: model.newDeathsInWeeks,
                     title: "新規死亡者数",
                     legend: "過去12週間",
                     //style: <#T##ChartStyle#>,
                     form: ChartForm.large,
-                    rateValue: Int(model.newDeathsRateComparedPrevDay),
+                    rateValue: model.newDeathsPrevRateInWeeks,
                     //dropShadow: <#T##Bool?#>,
                     valueSpecifier: "%.0f"
                 )
@@ -57,12 +57,12 @@ struct JapanWeeklySummaryView: View {
                     animatedToBack: true
                 )
                 LineChartView(
-                    data: self.model.needInpatientNumsInWeeks,
+                    data: model.needInpatientNumsInWeeks,
                     title: "入院治療等を要する者",
                     legend: "過去12週間",
                     //style: <#T##ChartStyle#>,
                     form: ChartForm.large,
-                    rateValue: Int(model.needInpatientRateComparedPrevDay),
+                    rateValue: model.needInpatientPrevRateInWeeks,
                     //dropShadow: <#T##Bool?#>,
                     valueSpecifier: "%.0f"
                 )

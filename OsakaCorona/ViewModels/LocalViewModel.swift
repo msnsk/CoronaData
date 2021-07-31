@@ -48,8 +48,11 @@ class LocalViewModel: ObservableObject {
     @Published var newPatientsNumComparedPrevDay: Int = 0
     @Published var newPatientsRateComparedPrevDay: Double = 0.00
     @Published var newPatientsNumInMonths = [Double]()
+    @Published var newPatientsPrevRateInMonths: Int = 0
     @Published var newPatientsNumInWeeks = [Double]()
+    @Published var newPatientsPrevRateInWeeks: Int = 0
     @Published var newPatientsNumInDays = [Double]()
+    @Published var newPatientsPrevRateInDays: Int = 0
     
     //MARK: - Initialize
     init() {
@@ -262,6 +265,11 @@ class LocalViewModel: ObservableObject {
         } else {
             newPatientsNumInMonths = patientsInMonths
         }
+        let lastNum = newPatientsNumInMonths[newPatientsNumInMonths.count - 1]
+        let prevNum = newPatientsNumInMonths[newPatientsNumInMonths.count - 2]
+        if prevNum > 0 {
+            newPatientsPrevRateInMonths = Int((lastNum - prevNum) / prevNum * 100)
+        }
     }
     // 12週間の新規感染者数を取得する
     func getNewPatientsNumInWeeks() {
@@ -276,6 +284,11 @@ class LocalViewModel: ObservableObject {
         } else {
             newPatientsNumInWeeks = patients.reversed()
         }
+        let lastNum = newPatientsNumInWeeks[newPatientsNumInWeeks.count - 1]
+        let prevNum = newPatientsNumInWeeks[newPatientsNumInWeeks.count - 2]
+        if prevNum > 0 {
+            newPatientsPrevRateInWeeks = Int((lastNum - prevNum) / prevNum * 100)
+        }
     }
     // 7日間の新規感染者数を取得する
     func getNewPatientsNumInDays() {
@@ -284,6 +297,11 @@ class LocalViewModel: ObservableObject {
             newPatientsNumInDays = Array(patients.suffix(7))
         } else {
             newPatientsNumInDays = patients
+        }
+        let lastNum = newPatientsNumInDays[newPatientsNumInDays.count - 1]
+        let prevNum = newPatientsNumInDays[newPatientsNumInDays.count - 2]
+        if prevNum > 0 {
+            newPatientsPrevRateInDays = Int((lastNum - prevNum) / prevNum * 100)
         }
     }
 }

@@ -15,10 +15,11 @@ struct LocalDailySummaryView: View {
         ScrollView {
             LazyVStack(spacing: 30) {
                 LineChartView(
-                    data: self.model.newPatientsNumInDays,
+                    data: model.newPatientsNumInDays,
                     title: "新規感染者数",
                     legend: "過去7日間",
                     form: ChartForm.large,
+                    rateValue: model.newPatientsPrevRateInDays,
                     valueSpecifier: "%.0f"
                 )
                 BarChartView(
@@ -26,8 +27,9 @@ struct LocalDailySummaryView: View {
                     title: "累積感染者数",
                     legend: "過去7日間",
                     form: ChartForm.extraLarge,
-                    cornerImage: Image(systemName: "chart.bar.fill"),
-                    valueSpecifier: "%.0f"
+                    cornerImage: nil,
+                    valueSpecifier: "%.0f",
+                    animatedToBack: true
                 )
             }
             .padding()

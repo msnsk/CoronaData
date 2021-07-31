@@ -40,8 +40,11 @@ class JapanViewModel: ObservableObject {
     @Published var newPatientsNumComparedPrevDay: Int = 0
     @Published var newPatientsRateComparedPrevDay: Double = 0.00
     @Published var newPatientsNumsInMonths = [Double]()
+    @Published var newPatientsPrevRateInMonths: Int = 0
     @Published var newPatientsNumsInWeeks = [Double]()
+    @Published var newPatientsPrevRateInWeeks: Int = 0
     @Published var newPatientsNumsInDays = [Double]()
+    @Published var newPatientsPrevRateInDays: Int = 0
     
     //MARK: - Japan Patients Need Inpatient Properties
     @Published var needInpatientData = [JapanPatientsNeedInpatientModel]() {
@@ -59,8 +62,11 @@ class JapanViewModel: ObservableObject {
     @Published var needInpatientNumComparedPrevDay: Int = 0
     @Published var needInpatientRateComparedPrevDay: Double = 0.00
     @Published var needInpatientNumsInMonths = [Double]()
+    @Published var needInpatientPrevRateInMonths: Int = 0
     @Published var needInpatientNumsInWeeks = [Double]()
+    @Published var needInpatientPrevRateInWeeks: Int = 0
     @Published var needInpatientNumsInDays = [Double]()
+    @Published var needInpatientPrevRateInDays: Int = 0
     
     //MARK: - Japan Deaths Properties
     @Published var deathsData = [JapanDeathsModel](){
@@ -95,8 +101,11 @@ class JapanViewModel: ObservableObject {
     @Published var newDeathsComparedPrevDay: Int = 0
     @Published var newDeathsRateComparedPrevDay: Double = 0
     @Published var newDeathsInMonths = [Double]()
+    @Published var newDeathsPrevRateInMonths: Int = 0
     @Published var newDeathsInWeeks = [Double]()
+    @Published var newDeathsPrevRateInWeeks: Int = 0
     @Published var newDeathsInDays = [Double]()
+    @Published var newDeathsPrevRateInDays: Int = 0
     
     //MARK: - Prefectures Patients Properties
     @Published var prefecturePatientsData = [Area]() {
@@ -269,6 +278,12 @@ class JapanViewModel: ObservableObject {
         } else {
             newPatientsNumsInMonths = newPatients
         }
+        let lastNum = newPatientsNumsInMonths[newPatientsNumsInMonths.count - 1]
+        let prevNum = newPatientsNumsInMonths[newPatientsNumsInMonths.count - 2]
+        if prevNum > 0 {
+            newPatientsPrevRateInMonths = Int((lastNum - prevNum) / prevNum * 100)
+        }
+        
     }
     // 12週間の新規感染者数を取得する
     func getNewPatientsNumInWeeks() {
@@ -285,17 +300,27 @@ class JapanViewModel: ObservableObject {
         } else {
             newPatientsNumsInWeeks = newPatientsInWeeks.reversed()
         }
+        let lastNum = newPatientsNumsInWeeks[newPatientsNumsInWeeks.count - 1]
+        let prevNum = newPatientsNumsInWeeks[newPatientsNumsInWeeks.count - 2]
+        if prevNum > 0 {
+            newPatientsPrevRateInWeeks = Int((lastNum - prevNum) / prevNum * 100)
+        }
     }
     // 7日間の新規感染者数を取得する
     func getNewPatientsNumsInDays() {
         var newPatientsInDays = [Double]()
-        for item in self.japanPatientsData {
+        for item in japanPatientsData {
             newPatientsInDays.append(Double(item.adpatients))
         }
         if newPatientsInDays.count >= 7 {
             newPatientsNumsInDays = Array(newPatientsInDays.suffix(7))
         } else {
             newPatientsNumsInDays = newPatientsInDays
+        }
+        let lastNum = newPatientsNumsInDays[newPatientsNumsInDays.count - 1]
+        let prevNum = newPatientsNumsInDays[newPatientsNumsInDays.count - 2]
+        if prevNum > 0 {
+            newPatientsPrevRateInDays = Int((lastNum - prevNum) / prevNum * 100)
         }
     }
     
@@ -370,6 +395,11 @@ class JapanViewModel: ObservableObject {
         } else {
             needInpatientNumsInMonths = needInpatientNums
         }
+        let lastNum = needInpatientNumsInMonths[needInpatientNumsInMonths.count - 1]
+        let prevNum = needInpatientNumsInMonths[needInpatientNumsInMonths.count - 2]
+        if prevNum != 0 {
+            needInpatientPrevRateInMonths = Int((lastNum - prevNum) / prevNum * 100)
+        }
     }
     // 12週間の入院治療等を要する者のデータを取得
     func getNeedInpatientNumsInWeeks() {
@@ -384,6 +414,11 @@ class JapanViewModel: ObservableObject {
         } else {
             needInpatientNumsInWeeks = needInpatientNums.reversed()
         }
+        let lastNum = needInpatientNumsInWeeks[needInpatientNumsInWeeks.count - 1]
+        let prevNum = needInpatientNumsInWeeks[needInpatientNumsInWeeks.count - 2]
+        if prevNum > 0 {
+            needInpatientPrevRateInWeeks = Int((lastNum - prevNum) / prevNum * 100)
+        }
     }
     // 7日間の入院治療等を要する者のデータを取得
     func getNeedInpatientNumsInDays() {
@@ -395,6 +430,11 @@ class JapanViewModel: ObservableObject {
             needInpatientNumsInDays = Array(needInpatientNums.suffix(7))
         } else {
             needInpatientNumsInDays = needInpatientNums
+        }
+        let lastNum = needInpatientNumsInDays[needInpatientNumsInDays.count - 1]
+        let prevNum = needInpatientNumsInDays[needInpatientNumsInDays.count - 2]
+        if prevNum > 0 {
+            needInpatientPrevRateInDays = Int((lastNum - prevNum) / prevNum * 100)
         }
     }
     
@@ -558,6 +598,11 @@ class JapanViewModel: ObservableObject {
         } else {
             newDeathsInMonths = deathsInMonths
         }
+        let lastNum = newDeathsInMonths[newDeathsInMonths.count - 1]
+        let prevNum = newDeathsInMonths[newDeathsInMonths.count - 2]
+        if prevNum > 0 {
+            newDeathsPrevRateInMonths = Int((lastNum - prevNum) / prevNum * 100)
+        }
     }
     // 12週間の新規死亡者数を取得する
     func getNewDeathsInWeeks() {
@@ -572,6 +617,11 @@ class JapanViewModel: ObservableObject {
         } else {
             newDeathsInWeeks = deathsInWeeks.reversed()
         }
+        let lastNum = newDeathsInWeeks[newDeathsInWeeks.count - 1]
+        let prevNum = newDeathsInWeeks[newDeathsInWeeks.count - 2]
+        if prevNum > 0 {
+            newDeathsPrevRateInWeeks = Int((lastNum - prevNum) / prevNum * 100)
+        }
     }
     // 7日間の新規死亡者数を取得する
     func getNewDeathsInDays() {
@@ -583,6 +633,11 @@ class JapanViewModel: ObservableObject {
             newDeathsInDays = Array(deathsInDays.suffix(7))
         } else {
             newDeathsInDays = deathsInDays
+        }
+        let lastNum = newDeathsInDays[newDeathsInDays.count - 1]
+        let prevNum = newDeathsInDays[newDeathsInDays.count - 2]
+        if prevNum > 0 {
+            newDeathsPrevRateInDays = Int((lastNum - prevNum) / prevNum * 100)
         }
     }
     

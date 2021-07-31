@@ -14,11 +14,13 @@ struct OtherDashboard: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            HStack(spacing: 0) {
+            HStack(alignment: .bottom, spacing: 0) {
                 AreaPickerView()
-                Text("のコロナ関連データ")
-                    .font(.title)
+                Text("のコロナウイルスの影響")
+                    .font(.title2)
             }
+            Text("Impact of COVID-19 in Selected Region")
+                .font(.footnote.weight(.light))
             
             HStack(spacing: 10){
                 HeaderComponentView(

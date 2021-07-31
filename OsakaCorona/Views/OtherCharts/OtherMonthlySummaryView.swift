@@ -15,19 +15,21 @@ struct OtherMonthlySummaryView: View {
         ScrollView {
             LazyVStack(spacing: 30) {
                 LineChartView(
-                    data: self.model.newPatientsNumInMonths,
+                    data: model.newPatientsNumInMonths,
                     title: "新規感染者数",
                     legend: "過去24ヶ月間",
                     form: ChartForm.large,
+                    rateValue: model.newPatientsPrevRateInMonths,
                     valueSpecifier: "%.0f"
                 )
                 BarChartView(
-                    data: ChartData(values: self.model.comulPatientsNumInMonths),
+                    data: ChartData(values: model.comulPatientsNumInMonths),
                     title: "累積感染者数",
                     legend: "過去24ヶ月間",
                     form: ChartForm.extraLarge,
-                    cornerImage: Image(systemName: "chart.bar.fill"),
-                    valueSpecifier: "%.0f"
+                    cornerImage: nil,
+                    valueSpecifier: "%.0f",
+                    animatedToBack: true
                 )
             }
             .padding()

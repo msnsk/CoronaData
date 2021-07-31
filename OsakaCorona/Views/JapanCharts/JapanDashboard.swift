@@ -14,8 +14,14 @@ struct JapanDashboard: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            Text("全国のコロナ関連データ")
-                .font(.title)
+            HStack(alignment: .bottom, spacing: 0) {
+                Text("全国")
+                    .font(.title)
+                Text("のコロナウイルスの影響")
+                    .font(.title2)
+            }
+            Text("Impact of COVID-19 Nationwide")
+                .font(.footnote.weight(.light))
             
             ScrollView(.horizontal) {
                 HStack(spacing: 10){
