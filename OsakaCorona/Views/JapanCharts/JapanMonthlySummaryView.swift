@@ -79,7 +79,7 @@ struct JapanMonthlySummaryView: View {
                     animatedToBack: true
                 )
             }
-            .padding()
+            .padding(.vertical)
         }
     }
 }

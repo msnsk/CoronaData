@@ -32,7 +32,7 @@ struct OtherDailySummaryView: View {
                     animatedToBack: true
                 )
             }
-            .padding()
+            .padding(.vertical)
         }
     }
 }

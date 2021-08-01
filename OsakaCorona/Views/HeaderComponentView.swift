@@ -47,7 +47,7 @@ struct HeaderComponentView: View {
         .background(
             RoundedRectangle(cornerRadius: 25.0)
                 .foregroundColor(Color(.systemBackground))
-                .shadow(color: Color(.systemGray).opacity(0.5), radius: 5)
+                .shadow(color: Color(.systemGray), radius: 8)
         )
         .fixedSize(horizontal: true, vertical: false)
     }

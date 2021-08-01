@@ -32,7 +32,7 @@ struct OtherWeeklySummaryView: View {
                     animatedToBack: true
                 )
             }
-            .padding()
+            .padding(.vertical)
         }
     }
 }

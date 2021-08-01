@@ -13,6 +13,7 @@
 		1720FE1926ABE61300C8C947 /* AreaPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1720FE1826ABE61300C8C947 /* AreaPickerView.swift */; };
 		17518DE426A9CA6100C9465F /* JapanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17518DE326A9CA6100C9465F /* JapanViewModel.swift */; };
 		17518DE726AA646800C9465F /* JapanDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17518DE626AA646800C9465F /* JapanDashboard.swift */; };
+		175AA64126B6B37400BB7D7E /* InformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175AA64026B6B37400BB7D7E /* InformationView.swift */; };
 		17726BDF26B007C20079E7F7 /* OtherDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17726BDE26B007C20079E7F7 /* OtherDashboard.swift */; };
 		17726BE226B008050079E7F7 /* OtherMonthlySummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17726BE126B008050079E7F7 /* OtherMonthlySummaryView.swift */; };
 		17726BE426B008180079E7F7 /* OtherWeeklySummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17726BE326B008180079E7F7 /* OtherWeeklySummaryView.swift */; };
@@ -61,6 +62,7 @@
 		1720FE1826ABE61300C8C947 /* AreaPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaPickerView.swift; sourceTree = "<group>"; };
 		17518DE326A9CA6100C9465F /* JapanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapanViewModel.swift; sourceTree = "<group>"; };
 		17518DE626AA646800C9465F /* JapanDashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JapanDashboard.swift; sourceTree = "<group>"; };
+		175AA64026B6B37400BB7D7E /* InformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationView.swift; sourceTree = "<group>"; };
 		17726BDE26B007C20079E7F7 /* OtherDashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherDashboard.swift; sourceTree = "<group>"; };
 		17726BE126B008050079E7F7 /* OtherMonthlySummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherMonthlySummaryView.swift; sourceTree = "<group>"; };
 		17726BE326B008180079E7F7 /* OtherWeeklySummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherWeeklySummaryView.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				1797A5DF26A5279100680A03 /* ContentView.swift */,
+				175AA64026B6B37400BB7D7E /* InformationView.swift */,
 				17D4647826B2F3630091884C /* HeaderComponentView.swift */,
 				1720FE1826ABE61300C8C947 /* AreaPickerView.swift */,
 				170A6C3426AAA0D800C7D53E /* JapanCharts */,
@@ -389,6 +392,7 @@
 			files = (
 				17780B0926A742F200DC5FD4 /* LocalMonthlySummaryView.swift in Sources */,
 				17F9DFD226A888C800D8270C /* LocalDailySummaryView.swift in Sources */,
+				175AA64126B6B37400BB7D7E /* InformationView.swift in Sources */,
 				170A6C3626AAA91600C7D53E /* JapanDaylySummaryView.swift in Sources */,
 				1797A60C26A5282200680A03 /* LocalViewModel.swift in Sources */,
 				17D4647926B2F3630091884C /* HeaderComponentView.swift in Sources */,

@@ -78,7 +78,7 @@ struct JapanWeeklySummaryView: View {
                     animatedToBack: true
                 )
             }
-            .padding()
+            .padding(.vertical)
         }
     }
 }

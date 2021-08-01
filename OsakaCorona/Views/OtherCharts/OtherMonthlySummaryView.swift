@@ -32,7 +32,7 @@ struct OtherMonthlySummaryView: View {
                     animatedToBack: true
                 )
             }
-            .padding()
+            .padding(.vertical)
         }
     }
 }

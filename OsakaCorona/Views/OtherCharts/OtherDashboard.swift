@@ -9,8 +9,13 @@ import SwiftUI
 
 struct OtherDashboard: View {
     @EnvironmentObject var model: AreaViewModel
-    @State var selection = 0
     let pigments = ["24ヶ月間", "12週間", "7日間"]
+    @State var selection = 0
+    @State var isShowingHeader = true {
+        didSet {
+            UserDefaults.standard.set(isShowingHeader, forKey:"isShowingHeaderOther")
+        }
+    }
     
     var body: some View {
         VStack(spacing: 0) {
@@ -21,26 +26,55 @@ struct OtherDashboard: View {
             }
             Text("Impact of COVID-19 in Selected Region")
                 .font(.footnote.weight(.light))
+                .padding(.bottom, 5)
             
-            HStack(spacing: 16){
-                HeaderComponentView(
-                    lastUpdate: model.latestDateOfPatients,
-                    title: "新規感染者",
-                    isComulative: false,
-                    mainNum: model.newPatientsNumLastDay,
-                    additionalNum: model.newPatientsNumComparedPrevDay,
-                    subAdditionalNum: model.newPatientsRateComparedPrevDay
-                )
-                HeaderComponentView(
-                    lastUpdate: model.latestDateOfPatients,
-                    title: "累積感染者",
-                    isComulative: true,
-                    mainNum: model.comulPatientsNumLastDay,
-                    additionalNum: model.comulPatients7DaysTotal,
-                    subAdditionalNum: model.comulPatients7DaysAverage
-                )
+            if !isShowingHeader {
+                ZStack {
+                    Divider()
+                    Button(action: {
+                        isShowingHeader.toggle()
+                    }, label: {
+                        Image(systemName: "chevron.down.circle.fill")
+                            .font(.title.weight(.thin))
+                            .foregroundColor(Color(.tertiarySystemBackground))
+                            .shadow(radius: 4)
+                    })
+                }
             }
-            .padding()
+            
+            if isShowingHeader {
+                HStack(spacing: 16){
+                    HeaderComponentView(
+                        lastUpdate: model.latestDateOfPatients,
+                        title: "新規感染者",
+                        isComulative: false,
+                        mainNum: model.newPatientsNumLastDay,
+                        additionalNum: model.newPatientsNumComparedPrevDay,
+                        subAdditionalNum: model.newPatientsRateComparedPrevDay
+                    )
+                    HeaderComponentView(
+                        lastUpdate: model.latestDateOfPatients,
+                        title: "累積感染者",
+                        isComulative: true,
+                        mainNum: model.comulPatientsNumLastDay,
+                        additionalNum: model.comulPatients7DaysTotal,
+                        subAdditionalNum: model.comulPatients7DaysAverage
+                    )
+                }
+                .padding()
+                
+                ZStack {
+                    Divider()
+                    Button(action: {
+                        isShowingHeader.toggle()
+                    }, label: {
+                        Image(systemName: "chevron.up.circle.fill")
+                            .font(.title.weight(.thin))
+                            .foregroundColor(Color(.tertiarySystemBackground))
+                            .shadow(radius: 4)
+                    })
+                }
+            }
             
             Picker(selection: $selection, label: Text("期間を選択")){
                 ForEach(0..<pigments.count) { index in
@@ -48,8 +82,9 @@ struct OtherDashboard: View {
                 }
             }
             .pickerStyle(SegmentedPickerStyle())
+            .shadow(color: Color(.tertiarySystemBackground), radius: 4)
             .padding(.horizontal, 40)
-            .padding(.bottom, 12)
+            .padding(.vertical, 12)
             
             if model.latestDateOfPatients != "Loading..." {
                 switch selection {
@@ -66,6 +101,9 @@ struct OtherDashboard: View {
             Spacer()
         }
         .padding(.vertical, 25)
+        .onAppear() {
+            self.isShowingHeader = UserDefaults.standard.bool(forKey: "isShowingHeaderOther")
+        }
     }
 }
 
