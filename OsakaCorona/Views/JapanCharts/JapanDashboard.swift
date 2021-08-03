@@ -122,6 +122,7 @@ struct JapanDashboard: View {
         .padding(.vertical, 25)
         .onAppear() {
             self.isShowingHeader = UserDefaults.standard.bool(forKey: "isShowingHeaderJapan")
+            print("model.latestDateOfPatientsData\(model.latestDateOfPatientsData)")
         }
     }
 }

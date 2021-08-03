@@ -10,13 +10,27 @@ import CoreLocation
 
 @main
 struct OsakaCoronaApp: App {
+    @State var isActive = false
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environmentObject(JapanViewModel())
-                .environmentObject(LocalViewModel())
-                .environmentObject(AreaViewModel())
+            ZStack {
+                if isActive {
+                    ContentView()
+                        .environmentObject(JapanViewModel())
+                        .environmentObject(LocalViewModel())
+                        .environmentObject(AreaViewModel())
+                } else {
+                    SplashView()
+                }
+            }
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    withAnimation {
+                        self.isActive = true
+                    }
+                }
+            }
         }
     }
 }

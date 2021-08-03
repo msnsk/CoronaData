@@ -13,13 +13,11 @@ class JapanViewModel: ObservableObject {
     @Published var japanPatientsData = [JapanPatientsDataModel]() {
         didSet {
             getLatestDateOfJapanPatients()
-            // 累積感染者のfunctions
             getComulPatientsNumLastDay()
             getComulPatientsNum7Days()
             getComulPatientsNumInMonths()
             getComulPatientsNumInWeeks()
             getComulPatientsNumInDays()
-            // 新規感染者のfunctions
             getNewPatientsNumLastDay()
             compareNewPatientsNumFromPrevDay()
             getNewPatientsNumInMonths()
@@ -27,7 +25,7 @@ class JapanViewModel: ObservableObject {
             getNewPatientsNumsInDays()
         }
     }
-    @Published var latestDateOfPatientsData = "...Loading"
+    @Published var latestDateOfPatientsData = "Loading..."
     // 累積感染者のproperties
     @Published var comulPatientsNumsLastDay: Int = 0
     @Published var comulPatients7DaysTotal: Int = 0
@@ -57,7 +55,7 @@ class JapanViewModel: ObservableObject {
             getNeedInpatientNumsInDays()
         }
     }
-    @Published var latestDateOfNeedInpatientData = "...Loading"
+    @Published var latestDateOfNeedInpatientData = "Loading..."
     @Published var needInpatientNumsLastDay: Int = 0
     @Published var needInpatientNumComparedPrevDay: Int = 0
     @Published var needInpatientRateComparedPrevDay: Double = 0.00
@@ -87,7 +85,7 @@ class JapanViewModel: ObservableObject {
             getNewDeathsInDays()
         }
     }
-    @Published var latestDateOfDeathsData = "...Loading"
+    @Published var latestDateOfDeathsData = "Loading..."
     // 累積死亡者数のproperties
     @Published var comulDeathsLastDay: Int = 0
     @Published var comulDeaths7DaysTotal: Int = 0
@@ -130,8 +128,8 @@ class JapanViewModel: ObservableObject {
             return
         }
         URLSession.shared.dataTask(with: url) { data, response, error in
-            let statusCode = (response as! HTTPURLResponse).statusCode
-            print("Japan Patients: Status Code: \(statusCode)")
+            //let statusCode = (response as! HTTPURLResponse).statusCode
+            //print("Japan Patients: Status Code: \(statusCode)")
             guard let jsonData = data else { return }
             do {
                 let fetchedData = try JSONDecoder().decode([JapanPatientsDataModel].self, from: jsonData)
@@ -254,21 +252,21 @@ class JapanViewModel: ObservableObject {
         for (index, item) in japanPatientsData.enumerated() {
             // データの最新の日付と月違いの同じ日にちだったら配列に追加する
             if item.date.hasSuffix(latestDateOfPatientsData.suffix(3)) {
-                newPatients.append((Double(item.npatients)))
+                newPatients.append((Double(item.adpatients)))
             // データの最新の日にちが31日か30日で、かつループitemの日付が2月28日の場合
             } else if (latestDateOfPatientsData.hasSuffix("-31") || latestDateOfPatientsData.hasSuffix("-30")) && item.date.hasSuffix("-02-28") {
                 // 閏年で2月29日のデータが見つかったら2月29日のデータを配列に追加
                 if japanPatientsData[index + 1].date.hasSuffix("-02-29") {
-                    newPatients.append(Double(japanPatientsData[index + 1].npatients))
+                    newPatients.append(Double(japanPatientsData[index + 1].adpatients))
                 // 閏年ではなく2月29日のデータが見つからない場合は2月28日のデータを配列に追加
                 } else {
-                    newPatients.append(Double(item.npatients))
+                    newPatients.append(Double(item.adpatients))
                 }
             } else {
                 for date in lastDatesExceptFeb {
                     // データの最新の日付が31日で、かつループitemの日付が月末が30日の月の末日の場合は、その末日のデータを配列に追加
                     if latestDateOfPatientsData.hasSuffix("-31") && item.date.hasSuffix(date) {
-                        newPatients.append(Double(item.npatients))
+                        newPatients.append(Double(item.adpatients))
                     }
                 }
             }
@@ -333,8 +331,8 @@ class JapanViewModel: ObservableObject {
             return
         }
         URLSession.shared.dataTask(with: url) { data, response, error in
-            let statusCode = (response as! HTTPURLResponse).statusCode
-            print("Japan Need Inpatient: Status Code: \(statusCode)")
+            //let statusCode = (response as! HTTPURLResponse).statusCode
+            //print("Japan Need Inpatient: Status Code: \(statusCode)")
             guard let jsonData = data else { return }
             do {
                 let fetchedData = try JSONDecoder().decode([JapanPatientsNeedInpatientModel].self, from: jsonData)
@@ -447,8 +445,8 @@ class JapanViewModel: ObservableObject {
             return
         }
         URLSession.shared.dataTask(with: url) { data, response, error in
-            let statusCode = (response as! HTTPURLResponse).statusCode
-            print("Japan Deaths: Status Code: \(statusCode)")
+            //let statusCode = (response as! HTTPURLResponse).statusCode
+            //print("Japan Deaths: Status Code: \(statusCode)")
             guard let jsonData = data else { return }
             do {
                 let fetchedData = try JSONDecoder().decode([JapanDeathsModel].self, from: jsonData)
@@ -650,8 +648,8 @@ class JapanViewModel: ObservableObject {
         }
         
         URLSession.shared.dataTask(with: url) { data, response, error in
-            let statusCode = (response as! HTTPURLResponse).statusCode
-            print("Prefecture Comulative: Status Code: \(statusCode)")
+            //let statusCode = (response as! HTTPURLResponse).statusCode
+            //print("Prefecture Comulative: Status Code: \(statusCode)")
             guard let jsonData = data else { return }
             do {
                 let fetchedData = try JSONDecoder().decode([PrefectureComulativePatientsModel].self, from: jsonData)

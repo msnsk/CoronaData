@@ -24,7 +24,7 @@ struct OtherDashboard: View {
                 Text("のコロナウイルスの影響")
                     .font(.title2)
             }
-            Text("Impact of COVID-19 in Selected Region")
+            Text("Impact of COVID-19 in a Selected Region")
                 .font(.footnote.weight(.light))
                 .padding(.bottom, 5)
             

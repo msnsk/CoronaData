@@ -80,8 +80,8 @@ class AreaViewModel: ObservableObject {
         }
         
         URLSession.shared.dataTask(with: url) { data, response, error in
-            let statusCode = (response as! HTTPURLResponse).statusCode
-            print("Local Patients: Status Code: \(statusCode)")
+            //let statusCode = (response as! HTTPURLResponse).statusCode
+            //print("Local Patients: Status Code: \(statusCode)")
             guard let jsonData = data else { return }
             do {
                 let fetchedData = try JSONDecoder().decode(LocalPatientsDataModel.self, from: jsonData)
@@ -102,7 +102,6 @@ class AreaViewModel: ObservableObject {
     }
     
     //MARK: - 累積感染者
-    
     // 全期間の累積感染者数を出力する
     func getComulPatientsAll() {
         var comulPatients = [(String, Double)]()

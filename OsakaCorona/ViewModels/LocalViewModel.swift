@@ -78,8 +78,8 @@ class LocalViewModel: ObservableObject {
         }
         
         URLSession.shared.dataTask(with: url) { data, response, error in
-            let statusCode = (response as! HTTPURLResponse).statusCode
-            print("Local Patients: Status Code: \(statusCode)")
+            //let statusCode = (response as! HTTPURLResponse).statusCode
+            //print("Local Patients: Status Code: \(statusCode)")
             guard let jsonData = data else { return }
             do {
                 let fetchedData = try JSONDecoder().decode(LocalPatientsDataModel.self, from: jsonData)

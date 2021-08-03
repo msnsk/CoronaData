@@ -16,16 +16,16 @@ struct LocalDailySummaryView: View {
             LazyVStack(spacing: 30) {
                 LineChartView(
                     data: model.newPatientsNumInDays,
-                    title: "新規感染者数",
-                    legend: "過去7日間",
+                    title: "新規感染者数の推移",
+                    legend: "1日おき\(model.latestDateOfPatients)まで",
                     form: ChartForm.large,
                     rateValue: model.newPatientsPrevRateInDays,
                     valueSpecifier: "%.0f"
                 )
                 BarChartView(
                     data: ChartData(values: self.model.comulPatientsNumInDays),
-                    title: "累積感染者数",
-                    legend: "過去7日間",
+                    title: "累積感染者数の推移",
+                    legend: "1日おき\(model.latestDateOfPatients)まで",
                     form: ChartForm.extraLarge,
                     cornerImage: nil,
                     valueSpecifier: "%.0f",

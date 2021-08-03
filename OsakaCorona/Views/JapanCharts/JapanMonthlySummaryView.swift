@@ -17,8 +17,8 @@ struct JapanMonthlySummaryView: View {
                 LineChartView(
                     //data: self.model.newPatientsNumsInMonths,
                     data: model.newPatientsNumsInMonths,
-                    title: "新規陽性者数",
-                    legend: "過去24ヶ月間",
+                    title: "新規陽性者数の推移",
+                    legend: "1ヶ月おき\(model.latestDateOfPatientsData)まで",
                     //style: <#T##ChartStyle#>,
                     form: ChartForm.large,
                     rateValue: model.newPatientsPrevRateInMonths,
@@ -27,19 +27,19 @@ struct JapanMonthlySummaryView: View {
                 )
                 BarChartView(
                     data: ChartData(values: model.comulPatientsNumsInMonths),
-                    title: "累積陽性者数",
-                    legend: "過去24ヶ月間",
+                    title: "累積陽性者数の推移",
+                    legend: "1ヶ月おき\(model.latestDateOfPatientsData)まで",
                     //style: <#T##ChartStyle#>,
                     form: ChartForm.extraLarge,
                     //dropShadow: <#T##Bool?#>
                     cornerImage: nil,
                     valueSpecifier: "%.0f",
-                    animatedToBack: true
+                    animatedToBack: false
                 )
                 LineChartView(
                     data: model.newDeathsInMonths,
-                    title: "新規死亡者数",
-                    legend: "過去24ヶ月間",
+                    title: "新規死亡者数の推移",
+                    legend: "1ヶ月おき\(model.latestDateOfPatientsData)まで",
                     //style: <#T##ChartStyle#>,
                     form: ChartForm.large,
                     rateValue: model.newDeathsPrevRateInMonths,
@@ -48,8 +48,8 @@ struct JapanMonthlySummaryView: View {
                 )
                 BarChartView(
                     data: ChartData(values: model.comulDeathsInMonths),
-                    title: "累積死亡者数",
-                    legend: "過去24ヶ月間",
+                    title: "累積死亡者数の推移",
+                    legend: "\(model.latestDateOfPatientsData)までの1ヶ月間隔",
                     //style: <#T##ChartStyle#>,
                     form: ChartForm.extraLarge,
                     //dropShadow: <#T##Bool?#>
@@ -59,8 +59,8 @@ struct JapanMonthlySummaryView: View {
                 )
                 LineChartView(
                     data: model.needInpatientNumsInMonths,
-                    title: "入院治療等を要する者",
-                    legend: "過去24ヶ月間",
+                    title: "入院治療等を要する者の推移",
+                    legend: "1ヶ月おき\(model.latestDateOfPatientsData)まで",
                     //style: <#T##ChartStyle#>,
                     form: ChartForm.large,
                     rateValue: model.needInpatientPrevRateInMonths,
@@ -69,8 +69,8 @@ struct JapanMonthlySummaryView: View {
                 )
                 BarChartView(
                     data: ChartData(values: model.prefectureComulPatientsNum),
-                    title: "都道府県別累積陽性者数",
-                    legend: "最終更新日の15位まで",
+                    title: "最新の都道府県別累積陽性者数",
+                    legend: "\(model.latestDateOfPatientsData)の上位15位",
                     //style: <#T##ChartStyle#>,
                     form: ChartForm.extraLarge,
                     //dropShadow: <#T##Bool?#>,

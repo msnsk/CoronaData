@@ -16,8 +16,8 @@ struct JapanWeeklySummaryView: View {
             LazyVStack(spacing: 30) {
                 LineChartView(
                     data: model.newPatientsNumsInWeeks,
-                    title: "新規陽性者数",
-                    legend: "過去12週間",
+                    title: "新規陽性者数の推移",
+                    legend: "1週間おき\(model.latestDateOfPatientsData)まで",
                     //style: <#T##ChartStyle#>,
                     form: ChartForm.large,
                     rateValue: model.newPatientsPrevRateInWeeks,
@@ -26,8 +26,8 @@ struct JapanWeeklySummaryView: View {
                 )
                 BarChartView(
                     data: ChartData(values: model.comulPatientsNumsInWeeks),
-                    title: "累積陽性者数",
-                    legend: "過去12週間",
+                    title: "累積陽性者数の推移",
+                    legend: "1週間おき\(model.latestDateOfPatientsData)まで",
                     //style: <#T##ChartStyle#>,
                     form: ChartForm.extraLarge,
                     //dropShadow: <#T##Bool?#>
@@ -37,8 +37,8 @@ struct JapanWeeklySummaryView: View {
                 )
                 LineChartView(
                     data: model.newDeathsInWeeks,
-                    title: "新規死亡者数",
-                    legend: "過去12週間",
+                    title: "新規死亡者数の推移",
+                    legend: "1週間おき\(model.latestDateOfPatientsData)まで",
                     //style: <#T##ChartStyle#>,
                     form: ChartForm.large,
                     rateValue: model.newDeathsPrevRateInWeeks,
@@ -47,8 +47,8 @@ struct JapanWeeklySummaryView: View {
                 )
                 BarChartView(
                     data: ChartData(values: model.comulDeathsInWeeks),
-                    title: "累積死亡者数",
-                    legend: "過去12週間",
+                    title: "累積死亡者数の推移",
+                    legend: "1週間おき\(model.latestDateOfPatientsData)まで",
                     //style: <#T##ChartStyle#>,
                     form: ChartForm.extraLarge,
                     //dropShadow: <#T##Bool?#>
@@ -59,7 +59,7 @@ struct JapanWeeklySummaryView: View {
                 LineChartView(
                     data: model.needInpatientNumsInWeeks,
                     title: "入院治療等を要する者",
-                    legend: "過去12週間",
+                    legend: "1週間おき\(model.latestDateOfPatientsData)まで",
                     //style: <#T##ChartStyle#>,
                     form: ChartForm.large,
                     rateValue: model.needInpatientPrevRateInWeeks,
