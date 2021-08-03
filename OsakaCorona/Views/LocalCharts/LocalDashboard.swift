@@ -35,13 +35,14 @@ struct LocalDashboard: View {
                     if !isShowingHeader {
                         ZStack {
                             Divider()
+                                .background(Color.secondary)
                             Button(action: {
                                 isShowingHeader.toggle()
                             }, label: {
                                 Image(systemName: "chevron.down.circle.fill")
                                     .font(.title.weight(.thin))
-                                    .foregroundColor(Color(.tertiarySystemBackground))
-                                    .shadow(radius: 4)
+                                    .foregroundColor(Color(.systemBackground))
+                                    .shadow(color: .primary, radius: 8)
                             })
                         }
                     }
@@ -69,13 +70,14 @@ struct LocalDashboard: View {
                         
                         ZStack {
                             Divider()
+                                .background(Color.secondary)
                             Button(action: {
                                 isShowingHeader.toggle()
                             }, label: {
                                 Image(systemName: "chevron.up.circle.fill")
                                     .font(.title.weight(.thin))
-                                    .foregroundColor(Color(.tertiarySystemBackground))
-                                    .shadow(radius: 4)
+                                    .foregroundColor(Color(.systemBackground))
+                                    .shadow(color: .primary, radius: 8)
                             })
                         }
                     }
@@ -86,7 +88,7 @@ struct LocalDashboard: View {
                         }
                     }
                     .pickerStyle(SegmentedPickerStyle())
-                    .shadow(color: Color(.tertiarySystemBackground), radius: 4)
+                    .shadow(color: Color(.systemGray3), radius: 4)
                     .padding(.horizontal, 40)
                     .padding(.vertical, 12)
                     

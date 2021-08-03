@@ -39,8 +39,8 @@ struct ContentView: View {
                     }, label: {
                         Image(systemName: "info.circle.fill")
                             .font(.title3.weight(.thin))
-                            .foregroundColor(Color(.tertiarySystemBackground))
-                            .shadow(radius: 4)
+                            .foregroundColor(Color(.systemBackground))
+                            .shadow(color: .primary, radius: 8)
                     })
                     .padding(8)
                     .sheet(isPresented: $isShowingInfo, onDismiss: {print("画面を閉じた")}) {

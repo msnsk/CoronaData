@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NeedAuthDescriptionView: View {
     var body: some View {
-        Color(.tertiarySystemBackground)
+        Color(.systemBackground)
             .edgesIgnoringSafeArea(.all)
         VStack(spacing: 25) {
             Text("位置情報サービスが無効です。")
@@ -43,10 +43,10 @@ struct NeedAuthDescriptionView: View {
                     Text("設定を開く")
                 }
             })
-            .padding(10)
-            .background(Color(.tertiarySystemBackground))
+            .padding()
+            .background(Color(.systemBackground))
             .cornerRadius(50)
-            .shadow(radius: 10)
+            .shadow(color: .primary, radius: 10)
         }
         .padding(.horizontal, 30)
     }
