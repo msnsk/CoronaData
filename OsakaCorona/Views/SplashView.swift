@@ -16,14 +16,15 @@ struct SplashView: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack(spacing: 0) {
-                LinearGradient(gradient: Gradient(colors: [Color(.systemTeal), .blue, .purple, .pink]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                Spacer()
+                LinearGradient(gradient: Gradient(colors: [.green, .blue, .purple, .pink]), startPoint: .leading, endPoint: .trailing)
                     .mask(
                         VStack(spacing: 8) {
                             Image("corona")
                                 .resizable()
                                 .frame(width: 120, height: 120)
                                 .padding(.bottom, 25)
-                            Text("コロナのデータ")
+                            Text("コロナデータ")
                                 .font(.system(size: 32, weight: .medium, design: .rounded))
                                 .foregroundColor(.primary)
                                 .multilineTextAlignment(.center)
@@ -32,6 +33,7 @@ struct SplashView: View {
                                 .foregroundColor(.secondary)
                         }
                     )
+                Spacer()
             }
             .opacity(isShowing ? 1 : 0)
             .blur(radius: isShowing ? 0.5 : 10)

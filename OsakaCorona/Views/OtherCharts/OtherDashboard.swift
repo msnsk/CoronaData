@@ -38,7 +38,7 @@ struct OtherDashboard: View {
                         Image(systemName: "chevron.down.circle.fill")
                             .font(.title.weight(.thin))
                             .foregroundColor(Color(.systemBackground))
-                            .shadow(color: .primary, radius: 8)
+                            .shadow(color: .secondary, radius: 5)
                     })
                 }
             }
@@ -73,7 +73,7 @@ struct OtherDashboard: View {
                         Image(systemName: "chevron.up.circle.fill")
                             .font(.title.weight(.thin))
                             .foregroundColor(Color(.systemBackground))
-                            .shadow(color: .primary,radius: 8)
+                            .shadow(color: .secondary,radius: 5)
                     })
                 }
             }
